@@ -1,6 +1,6 @@
-import { Chat, Emotion } from "../ChatModels";
-import { MemoryModel } from "../MemoryModel";
-import Relationship from "../RelationShipModel";
+import { Chat, Emotion } from "../models/ChatModels";
+import { MemoryModel } from "../models/MemoryModel";
+import Relationship from "../models/RelationShipModel";
 
 class ChatHistoryAnalyser {
 

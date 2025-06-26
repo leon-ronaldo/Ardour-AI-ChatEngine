@@ -1,0 +1,10 @@
+[
+  {
+    "email": "lisa.chen@example.com",
+    "password": "lisa@ardour",
+    "userId": "684ae745794f47ec213bbf68",
+    "profileImage": "https://i.pinimg.com/474x/14/48/3c/14483c3898da857249b9e901345284b8.jpg",
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODRhZTc0NTc5NGY0N2VjMjEzYmJmNjgiLCJlbWFpbCI6Imxpc2EuY2hlbkBleGFtcGxlLmNvbSIsImlhdCI6MTc1MDkxMjgyNywiZXhwIjoxNzUwOTk5MjI3fQ.9AR3Z77VU2Tcm7juN9IF8vJpA5Q_7MJIik2nVVWG39k",
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODRhZTc0NTc5NGY0N2VjMjEzYmJmNjgiLCJlbWFpbCI6Imxpc2EuY2hlbkBleGFtcGxlLmNvbSIsImlhdCI6MTc1MDkxMjgyNywiZXhwIjoxNzUxNTE3NjI3fQ.Em9gs2U-shc51wmmk_PYo-eAOzBbPSiQmQbK5LEIBkI"
+  }
+]

@@ -1,0 +1,21 @@
+{
+  "name": "ardour-ai-chatengine",
+  "version": "1.0.0",
+  "description": "## The AI chat engine for Ardour AI",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@types/dotenv": "^8.2.3",
+    "@types/ws": "^8.18.1",
+    "dotenv": "^16.5.0",
+    "ws": "^8.18.2"
+  }
+}
