@@ -1,21 +1,34 @@
 import dotenv, { parse } from "dotenv"
 import WebSocket from "ws"
-import { WSAuthentiacationResponse, WSAuthenticationRequest } from "./utils/types";
+import { WSAuthentiacationResponse, WSAuthenticationRequest, WSBaseResponse, WSServerResponse } from "./utils/types";
 import stringify, { insertWithoutDuplicate } from "./utils/tools";
 import { UserCreds, loadData, saveData } from "./data/userData.service";
+import { AccountsRouter } from "./controllers/acountController";
+import { ChatsRouter } from "./controllers/chatController";
+import InitTestApp from "./Tests/testApp";
 
 dotenv.config()
 
-let credentials: UserCreds = {
+export let credentials: UserCreds = {
     email: "lisa.chen@example.com",
     password: "lisa@ardour",
     userId: "",
     profileImage: "",
     accessToken: "",
     refreshToken: "",
+    memoryFragments: [],
+    characterTrait: {}
 }
 
 let wss: WebSocket;
+
+export default function useWSS() {
+    if (!wss) {
+        throw Error("connection to server is not initialized")
+    }
+
+    return wss;
+}
 
 function connectServer() {
 
@@ -35,11 +48,18 @@ function connectServer() {
 }
 
 function handleMessage(message: WebSocket.MessageEvent) {
-    console.log("data from server", message.data);
+    // console.log("recieved from server", message.data.toString());
     const parsedData = JSON.parse(message.data.toString());
 
-    if (parsedData.data) { }
-    if (parsedData.message) { }
+    if (parsedData.data) {
+        // use data from server
+    }
+    if (parsedData.message) {
+        console.log("recieved a message", parsedData);
+        if (parsedData.code === 2000) {
+            InitTestApp()
+        }
+    }
     if (parsedData.error) { }
 }
 
@@ -74,15 +94,36 @@ function handleAuthentication() {
                     ...data.data
                 }
 
-                const userCreds = loadData()
-                insertWithoutDuplicate(userCreds, credentials);
-                saveData(userCreds)
+                let userCreds = loadData()
+                saveData(userCreds.map(cred => { if (cred.email === credentials.email) return credentials; else return cred }))
             }
 
             wss.close()
             connectServer()
         }
     })
+}
+
+function router(data: any) {
+
+    let parsedData: WSServerResponse;
+
+    try {
+        parsedData = data
+    } catch (e) {
+        return console.error(e);
+    }
+
+    switch (parsedData.type) {
+        case "Account":
+            return AccountsRouter(parsedData);
+        case "Chat":
+            return ChatsRouter(parsedData);
+        case "Notification":
+            return
+        default:
+            return;
+    }
 }
 
 connectServer()

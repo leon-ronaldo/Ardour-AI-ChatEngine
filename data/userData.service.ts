@@ -1,5 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import { MemoryModel } from '../models/MemoryModel';
+import { HumanCharacterProfile } from '../models/HumanProfile';
 
 const DATA_PATH = path.join(__dirname, 'users.json');
 
@@ -10,6 +12,9 @@ export type UserCreds = {
     profileImage?: string,
     accessToken?: string,
     refreshToken?: string,
+    contacts?: { userId: string, userName: string }[],
+    memoryFragments: MemoryModel[],
+    characterTrait: HumanCharacterProfile
 };
 
 export function saveData(data: UserCreds[]) {

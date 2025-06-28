@@ -108,7 +108,7 @@ export type WSAuthenticationRequest =
   | WSBaseRequest<"Authentication", "AUTHENTICATE_WITH_PASSWORD", { email: string, password: string }>
 
 // UNION TYPE FOR ALL REQUESTS
-export type WSClientRequest = WSAccountRequest | WSChatRequest | WSAuthenticationRequest | WSNotificationRequest;
+export type WSServerRequest = WSAccountRequest | WSChatRequest | WSAuthenticationRequest | WSNotificationRequest;
 
 // ACCOUNT MODULE
 export type WSAccountResponse =
@@ -144,4 +144,4 @@ export type WSAuthentiacationResponse =
   | WSBaseResponse<"Authentication", "REFRESH_TOKEN", { refreshToken: string, userId: string, profileImage?: string }>
 
 // UNION TYPE FOR ALL RESPONSES
-export type WSClientResponse = WSAccountResponse | WSChatResponse | WSAuthentiacationResponse | WSNotificationResponse;
+export type WSServerResponse = WSAccountResponse | WSChatResponse | WSAuthentiacationResponse | WSNotificationResponse;
