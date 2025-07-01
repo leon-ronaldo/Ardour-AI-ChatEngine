@@ -2,14 +2,17 @@ import dotenv, { parse } from "dotenv"
 import WebSocket from "ws"
 import { WSAuthentiacationResponse, WSAuthenticationRequest, WSBaseResponse, WSServerResponse } from "./utils/types";
 import stringify, { insertWithoutDuplicate } from "./utils/tools";
-import { UserCreds, loadData, saveData } from "./data/userData.service";
+import { AgentCreds, loadData, saveData } from "./data/userData.service";
 import { AccountsRouter } from "./controllers/acountController";
 import { ChatsRouter } from "./controllers/chatController";
 import InitTestApp from "./Tests/testApp";
 
 dotenv.config()
 
-export let credentials: UserCreds = {
+export let credentials: AgentCreds = {
+    name: "Lisa Chen",
+    age: 22,
+    gender: "female",
     email: "lisa.chen@example.com",
     password: "lisa@ardour",
     userId: "",
@@ -32,8 +35,8 @@ export default function useWSS() {
 
 function connectServer() {
 
-    const userCreds = loadData()
-    const lisaCreds = userCreds.find(userCred => userCred.email === "lisa.chen@example.com")
+    const AgentCreds = loadData()
+    const lisaCreds = AgentCreds.find(userCred => userCred.email === "lisa.chen@example.com")
 
     if (!lisaCreds) {
         handleAuthentication()
@@ -94,8 +97,8 @@ function handleAuthentication() {
                     ...data.data
                 }
 
-                let userCreds = loadData()
-                saveData(userCreds.map(cred => { if (cred.email === credentials.email) return credentials; else return cred }))
+                let AgentCreds = loadData()
+                saveData(AgentCreds.map(cred => { if (cred.email === credentials.email) return credentials; else return cred }))
             }
 
             wss.close()

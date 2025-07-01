@@ -2,6 +2,7 @@ import { IChatMessage } from "../models/ChatPool";
 import { MemoryModel } from "../models/MemoryModel";
 import getAIResponse from "../utils/gemini";
 import { formatChatLog } from "../utils/tools";
+import { IPassProfile } from "./Master";
 
 export type ChatCategory =
     | "StateReflection"          // Talks about current state or feeling
@@ -49,24 +50,9 @@ export interface ContextState {
     timestamp: number;           // When the activity started (Date.now())
 }
 
-
 export default class DialogueGenerator {
-    chats: IChatMessage[];
     counter: number = 0;
     epoch: number = 20;
-    currentContext?: ContextState;
-    previousContexts?: ContextState[];
-    memoryFragment: MemoryModel;
-
-    constructor(chats: IChatMessage[], memoryFragment: MemoryModel) {
-        this.chats = chats;
-        this.memoryFragment = memoryFragment;
-        this.generateCurrentContext()
-    }
-
-    async generateCurrentContext() {
-        this.currentContext = await this.generateContext("adult woman", new Date())
-    }
 
     // Define dynamic range per weight (in minutes)
     contextDurations: Record<ContextWeight, [min: number, max: number]> = {
@@ -83,14 +69,14 @@ export default class DialogueGenerator {
         return Math.floor(Math.random() * (durationMax - durationMin + 1)) + durationMin;
     }
 
+    // Now: context timestamp = END time
     isContextExpired(latest: ContextState, now: number): boolean {
-        const allowedDuration = this.getRandomDurationMs(latest.contextWeight);
-        return now - latest.timestamp > allowedDuration;
+        return now > latest.timestamp; // timestamp is when the activity should be finished
     }
 
     async generateContext(
         professionOrTrait: string,
-        currentDate: Date,
+        currentDate: Date = new Date(),
         previousContexts: ContextState[] = []
     ): Promise<ContextState> {
         const now = currentDate.getTime();
@@ -128,9 +114,9 @@ export default class DialogueGenerator {
         if (!response) {
             // fallback if AI fails
             return {
-                activity: "unknown",
+                activity: "decide anything on your own!",
                 contextWeight: "LIGHT",
-                timestamp: now,
+                timestamp: this.getRandomDurationMs("LIGHT"),
             };
         }
 
@@ -139,7 +125,7 @@ export default class DialogueGenerator {
             return {
                 activity: context.activity,
                 contextWeight: context.contextWeight,
-                timestamp: now,
+                timestamp: this.getRandomDurationMs(context.contextWeight),
             };
         } catch (e) {
             console.log(response.trim());
@@ -148,7 +134,7 @@ export default class DialogueGenerator {
             return {
                 activity: "idle",
                 contextWeight: "LIGHT",
-                timestamp: now,
+                timestamp: this.getRandomDurationMs("LIGHT"),
             };
         }
     }
@@ -259,55 +245,45 @@ export default class DialogueGenerator {
     }
 
 
-    async generateDialogue(message: string): Promise<string | null> {
+    async generateDialogue(
+        ageTrait: string,
+        message: string,
+        chats: IChatMessage[],
+        profile: IPassProfile,
+        currentContext: ContextState,
+    ): Promise<string | null> {
         // 1️⃣ Classify the incoming message
         const classified = await this.classifyChatCategory(message);
         if (!classified) return null;
 
         const { requiresContext } = classified;
 
-        // 2️⃣ Refresh or reuse context if the reply needs it
-        if (requiresContext) {
-            const now = Date.now();
-            const latest = this.currentContext;
-            if (!latest || this.isContextExpired(latest, now)) {
-                this.previousContexts = [
-                    ...(this.previousContexts ?? []),
-                    latest,
-                ].filter(Boolean) as ContextState[];
-                this.currentContext = await this.generateContext(
-                    "adult woman",
-                    new Date(),
-                    this.previousContexts
-                );
-            }
-        }
-
         // 3️⃣ Grab the recent sliding‑window chat history
-        const history = this.getRecentChatWindow(this.chats, 30, 1800); // ~1 800 tokens max
+        const history = this.getRecentChatWindow(chats, 30, 1800); // ~1 800 tokens max
 
         // 4️⃣ Prompt the LLM to reply like a human, with strict rules
         const prompt = `
-      You are **Lisa**, a 22‑year‑old friendly woman chatting with your close friend.
+      You are **${profile.agentName}**, a ${profile.agentAge}-year-old friendly ${profile.agentGender} 
+      chatting with ${profile.userName}, a ${profile.agentAge}-year-old ${profile.agentGender}, your close friend.
       
       STRICT BEHAVIOR RULES:
       1. You are part of an ongoing chat. **Do NOT restart context** each reply.
       2. Use emojis only if they fit the mood.
       3. Do **not** say the user's name unless emotionally necessary.
-      4. Be concise — avoid rambling or over‑explaining.
+      4. Be concise — avoid rambling or over-explaining.
       5. Always **answer the user's question correctly** before anything else.
       6. If the user asks for a definition (e.g., “What does IKR mean?”) **define it directly**.
       7. Never hallucinate events or people unless they were already mentioned.
       8. Match the user’s tone and energy — don’t overhype when they’re calm.
       9. If the message is confusing, ask a **clarifying question** instead of guessing.
       
-      Return **only the next reply**. Do NOT add explanations or filler.
+      Return **only the next reply**.
       
       --- CONTEXT ---
-      ${requiresContext ? `You are currently: ${this.currentContext?.activity}` : "No special context needed"}
+      ${requiresContext ? `You are currently: ${currentContext?.activity}` : "No special context needed"}
       
       --- RECENT CHAT HISTORY ---
-      ${formatChatLog(history, this.memoryFragment.userId!)}
+      ${formatChatLog(history, profile.userId!)}
       
       --- USER MESSAGE ---
       "${message}"

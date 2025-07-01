@@ -3,13 +3,6 @@ import { IChatMessage } from "../models/ChatPool";
 import { MemoryModel } from "../models/MemoryModel";
 
 export default class DialogueRedefiner {
-    memoryFragment: MemoryModel;
-    chatMessages: IChatMessage[];
-
-    constructor(memory: MemoryModel, messages: IChatMessage[]) {
-        this.memoryFragment = memory;
-        this.chatMessages = messages;
-    }
 
     /**
      * Polishes the raw AI reply so it feels human:
@@ -20,11 +13,13 @@ export default class DialogueRedefiner {
      */
     async refineDialogue(
         rawReply: string,
+        chatMessages: IChatMessage[],
+        userName: string
     ): Promise<string> {
         // Last few messages for tone reference (optional, keeps prompt light)
-        const recentContext = this.chatMessages
+        const recentContext = chatMessages
             .slice(-6)
-            .map(m => (m.from === this.memoryFragment.name ? `${this.memoryFragment.name}: ${m.message}` : `AI: ${m.message}`))
+            .map(m => (m.from === userName ? `${userName}: ${m.message}` : `AI: ${m.message}`))
             .join("\n");
 
         const prompt = `

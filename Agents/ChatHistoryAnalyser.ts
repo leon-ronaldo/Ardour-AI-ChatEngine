@@ -7,18 +7,13 @@ import getAIResponse from "../utils/gemini";
 import { formatChatLog } from "../utils/tools";
 
 export default class ChatHistoryAnalyser {
-  contactId: string;
 
-  constructor(contactId: string) {
-    this.contactId = contactId;
-  }
-
-  async analyzeBigFive(messages: IChatMessage[]): Promise<BigFiveTraits> {
+  async analyzeBigFive(messages: IChatMessage[], contactId: string): Promise<BigFiveTraits> {
     const prompt = `
       You're a psychology expert. Based on the following chat messages, rate the user's Big Five personality traits (between 0 and 1 for each):
       
       Chat log:
-      ${formatChatLog(messages, this.contactId)}
+      ${formatChatLog(messages, contactId)}
       
       Return JSON in the following format:
       {
@@ -33,12 +28,12 @@ export default class ChatHistoryAnalyser {
     return JSON.parse(response!);
   }
 
-  async analyzeEmotionalTraits(messages: IChatMessage[]): Promise<EmotionalTraits> {
+  async analyzeEmotionalTraits(messages: IChatMessage[], contactId: string): Promise<EmotionalTraits> {
     const prompt = `
       You are an emotional intelligence analyst. Given the chat history, rate the user's emotional traits on a scale from 0 to 1 (higher is more):
       
       Chat log:
-      ${formatChatLog(messages, this.contactId)}
+      ${formatChatLog(messages, contactId)}
       
       Return JSON like this:
       {
@@ -55,12 +50,12 @@ export default class ChatHistoryAnalyser {
     return JSON.parse(response!);
   }
 
-  async analyzeSocialTraits(messages: IChatMessage[]): Promise<SocialTraits> {
+  async analyzeSocialTraits(messages: IChatMessage[], contactId: string): Promise<SocialTraits> {
     const prompt = `
       You're a social behavior analyst. Analyze the chat and return the user's social traits from 0 to 1:
       
       Chat log:
-      ${formatChatLog(messages, this.contactId)}
+      ${formatChatLog(messages, contactId)}
       
       Return this JSON:
       {
@@ -75,12 +70,12 @@ export default class ChatHistoryAnalyser {
     return JSON.parse(response!);
   }
 
-  async analyzeMoralTraits(messages: IChatMessage[]): Promise<MoralTraits> {
+  async analyzeMoralTraits(messages: IChatMessage[], contactId: string): Promise<MoralTraits> {
     const prompt = `
       You're a moral philosopher. Based on this chat, rate the user's moral characteristics (scale: 0 to 1):
       
       Chat log:
-      ${formatChatLog(messages, this.contactId)}
+      ${formatChatLog(messages, contactId)}
       
       Return JSON like:
       {
@@ -94,12 +89,12 @@ export default class ChatHistoryAnalyser {
     return JSON.parse(response!);
   }
 
-  async analyzeCognitiveTraits(messages: IChatMessage[]): Promise<CognitiveTraits> {
+  async analyzeCognitiveTraits(messages: IChatMessage[], contactId: string): Promise<CognitiveTraits> {
     const prompt = `
       You are a cognitive scientist. Based on this chat log, rate the user's cognitive traits.
       
       Chat log:
-      ${formatChatLog(messages, this.contactId)}
+      ${formatChatLog(messages, contactId)}
       
       Return JSON like:
       {
@@ -116,13 +111,13 @@ export default class ChatHistoryAnalyser {
     return JSON.parse(response!);
   }
 
-  async analyzeAllTraits(messages: IChatMessage[]): Promise<HumanCharacterProfile> {
+  async analyzeAllTraits(messages: IChatMessage[], contactId: string): Promise<HumanCharacterProfile> {
     return {
-      bigFive: await this.analyzeBigFive(messages),
-      emotional: await this.analyzeEmotionalTraits(messages),
-      social: await this.analyzeSocialTraits(messages),
-      cognitive: await this.analyzeCognitiveTraits(messages),
-      moral: await this.analyzeMoralTraits(messages)
+      bigFive: await this.analyzeBigFive(messages, contactId),
+      emotional: await this.analyzeEmotionalTraits(messages, contactId),
+      social: await this.analyzeSocialTraits(messages, contactId),
+      cognitive: await this.analyzeCognitiveTraits(messages, contactId),
+      moral: await this.analyzeMoralTraits(messages, contactId)
     };
   }
 
@@ -245,7 +240,7 @@ Always use matching roles from above.
 ### ✨ Chat log:
 ${formatChatLog(relevantMessages, contactId)}
 
-Return strict JSON only in this format (or \`[]\` if no valid incidents):
+Return strict JSON only like this format (or \`[]\` if no valid incidents):
 
 [
   {

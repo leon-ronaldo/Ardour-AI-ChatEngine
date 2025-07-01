@@ -16,16 +16,6 @@ let memoryFragment: MemoryModel;
 // 🔷 Init Entry
 // ------------------------------------------
 
-function loadMemoryFragment() {
-    memoryFragment = credentials.memoryFragments.find(fragment => fragment.userId === targetUserId) ?? {};
-    memoryFragment.userId = targetUserId;
-    memoryFragment.name = "Leon Ronaldo";
-}
-
-function saveMemoryFragment() {
-    credentials.memoryFragments.map(fragment => { if (fragment.userId === targetUserId) return memoryFragment; else return fragment });
-}
-
 export default function InitTestApp() {
     const wss = useWSS();
 
@@ -44,9 +34,6 @@ function requestChatHistory(wss: WebSocket) {
 }
 
 function listenToIncomingMessages(wss: WebSocket) {
-    loadMemoryFragment();
-    const dialogueGenerator = new DialogueGenerator(messages, memoryFragment);
-    const dialogueRedefiner = new DialogueRedefiner(memoryFragment, messages);
 
     wss.addEventListener("message", async (event: any) => {
         const parsed = (JSON.parse(event.data.toString())).data;
@@ -61,7 +48,6 @@ function listenToIncomingMessages(wss: WebSocket) {
         if (parsed?.resType === "PRIVATE_CHAT_MESSAGE") {
             const res = parsed as WSBaseResponse<"Chat", "PRIVATE_CHAT_MESSAGE", IChatMessage>;
             printChat(res.data);
-            sendMessage(await dialogueRedefiner.refineDialogue((await dialogueGenerator.generateDialogue(res.data.message))!))
         }
     });
 }
@@ -70,16 +56,6 @@ function printChat(msg: IChatMessage) {
     const sender = msg.from === credentials.userId ? '🟦 You' : '🟥 Them';
     const time = new Date(msg.timestamp).toLocaleTimeString();
     console.log(`[${time}] ${sender}: ${msg.message}`);
-}
-
-async function respond(msg: IChatMessage) {
-    if (msg.from !== credentials.userId) {
-        const prompt = baseChattingPrompt(msg.message, "Leon Ronaldo", messages);
-        const aiReply = await getAIResponse(prompt);
-        if (aiReply) {
-            sendMessage(aiReply.trim());
-        }
-    }
 }
 
 // ------------------------------------------
