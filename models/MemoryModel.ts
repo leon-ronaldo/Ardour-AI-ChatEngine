@@ -1,3 +1,4 @@
+import { IPassProfile } from "../Agents/Master"
 import { HumanCharacterProfile } from "./HumanProfile"
 import Relationship from "./RelationShipModel"
 
@@ -10,11 +11,10 @@ export interface Incident {
 }
 
 export interface MemoryModel {
-    userId?: string,  // almost the same
-    name?: string, // almost the same
-
-    age?: number,
+    profile: IPassProfile,
     livingIn?: string,
+
+    knowThem?: boolean,
 
     people?: Relationship[],
     incidents?: Incident[],

@@ -47,7 +47,13 @@ export type ContextWeight = "LIGHT" | "MEDIUM" | "HEAVY";
 export interface ContextState {
     activity: string;            // e.g., "eating", "coding", "watching movie"
     contextWeight: ContextWeight; // Duration/importance of the context
-    timestamp: number;           // When the activity started (Date.now())
+    timestamp: number;
+    absenceTimeState?: AbsenceTimeState;        // When the activity started (Date.now())
+}
+
+export interface AbsenceTimeState {
+    startTimestamp: number;
+    endTimestamp: number;
 }
 
 export default class DialogueGenerator {
@@ -74,69 +80,122 @@ export default class DialogueGenerator {
         return now > latest.timestamp; // timestamp is when the activity should be finished
     }
 
+    /** Choose an absence window **inside** [now, activityEnd]. */
+    private getAbsenceWindow(
+        now: number,
+        activityEnd: number,
+        weight: ContextWeight,
+    ): AbsenceTimeState {
+        const totalMs = activityEnd - now;
+
+        // Pick absence length as a proportion of total
+        const [minPct, maxPct] =
+            weight === "LIGHT"
+                ? [0.1, 0.25]
+                : weight === "MEDIUM"
+                    ? [0.2, 0.4]
+                    : [0.25, 0.5]; // HEAVY
+
+        const absenceLength =
+            Math.floor(
+                totalMs *
+                (minPct + Math.random() * (maxPct - minPct)),
+            );
+
+        // Random start so that end ≤ activityEnd
+        const latestPossibleStart = activityEnd - absenceLength;
+        const start =
+            now + Math.floor(Math.random() * (latestPossibleStart - now + 1));
+        const end = start + absenceLength;
+
+        return { startTimestamp: start, endTimestamp: end };
+    }
+
+    /** Main entry */
     async generateContext(
         professionOrTrait: string,
         currentDate: Date = new Date(),
-        previousContexts: ContextState[] = []
+        previousContexts: ContextState[] = [],
     ): Promise<ContextState> {
         const now = currentDate.getTime();
-        const latest = previousContexts[previousContexts.length - 1];
+        const latest = previousContexts[-1];
 
-        // If there's a recent context and it hasn't expired yet, reuse it
+        // 1. Re‑use current context if still active
         if (latest && !this.isContextExpired(latest, now)) {
             return latest;
         }
 
-        // Use AI to generate new context
-        const hour = currentDate.getHours();
-        const minute = currentDate.getMinutes();
-
+        // 2. Ask AI for activity + weight
+        const hour = currentDate.getHours().toString().padStart(2, "0");
+        const minute = currentDate.getMinutes().toString().padStart(2, "0");
         const prompt = `
-  You are a smart AI assistant trained to predict what a person is most likely doing **right now** based on their profession/trait and the time of day.
-  
-  The person is a "${professionOrTrait}" and the current time is ${hour.toString().padStart(2, "0")}:${minute.toString().padStart(2, "0")}.
- 
-  Notes:
-  - "activity" should be casual and human-like, not too robotic
-  - "contextWeight" must be one of: "LIGHT", "MEDIUM", "HEAVY"
-  - Output JSON only. No explanation text.
+You are a highly consistent assistant that predicts what a person is most likely doing **right now**, based on their role and current time of day.
 
-  Return a JSON object describing the current context like this format:
+## Your Goal:
+Determine the current **casual human activity** the person is doing, and classify how long/important the activity is using a weight category: "LIGHT", "MEDIUM", or "HEAVY".
 
-  {
-    "activity": "scrolling through Instagram reels",
-    "contextWeight": "LIGHT",
-    "timestamp": ${now}
-  }
-  `;
+## Output:
+Only return valid **JSON**. No comments, no markdown. Format:
+{
+  "activity": string,
+  "contextWeight": "LIGHT" | "MEDIUM" | "HEAVY"
+}
 
-        const response = await getAIResponse(prompt);
-        if (!response) {
-            // fallback if AI fails
-            return {
-                activity: "decide anything on your own!",
-                contextWeight: "LIGHT",
-                timestamp: this.getRandomDurationMs("LIGHT"),
-            };
-        }
+## Rules:
+- Think like a human, not a robot. Output should sound like how people behave day to day.
+- The activity must be something they are **currently** doing.
+- Use "LIGHT" for small quick actions (e.g., scrolling phone, walking to fridge).
+- Use "MEDIUM" for focused or routine tasks (e.g., working, eating, light workouts).
+- Use "HEAVY" for immersive or long-duration activities (e.g., in a meeting, deep work, long commute).
 
+## Examples:
+If time is 08:45 and the person is a "college student":
+{
+  "activity": "getting ready for class",
+  "contextWeight": "MEDIUM"
+}
+
+If time is 13:15 and the person is a "software engineer":
+{
+  "activity": "having lunch while checking Slack",
+  "contextWeight": "MEDIUM"
+}
+
+If time is 23:30 and the person is a "graphic designer":
+{
+  "activity": "watching YouTube in bed",
+  "contextWeight": "LIGHT"
+}
+
+## Current context:
+The person is a "${professionOrTrait}" and the time is ${hour}:${minute.padStart(2, "0")}.
+Return only a JSON object, no extra explanation.
+`;
+
+
+        let activity = "idle";
+        let weight: ContextWeight = "LIGHT";
         try {
-            const context = JSON.parse(response.trim());
-            return {
-                activity: context.activity,
-                contextWeight: context.contextWeight,
-                timestamp: this.getRandomDurationMs(context.contextWeight),
-            };
-        } catch (e) {
-            console.log(response.trim());
-
-            console.error("Failed to parse AI context response:", e);
-            return {
-                activity: "idle",
-                contextWeight: "LIGHT",
-                timestamp: this.getRandomDurationMs("LIGHT"),
-            };
+            const raw = await getAIResponse(prompt);
+            const json = JSON.parse(raw);
+            activity = json.activity;
+            weight = json.contextWeight;
+        } catch {
+            /* swallow & keep defaults */
         }
+
+        // 3. Compute duration and absence window
+        const durationMs = this.getRandomDurationMs(weight);
+        const activityEnd = now + durationMs;
+        const absence = this.getAbsenceWindow(now, activityEnd, weight);
+
+        // 4. Return full context
+        return {
+            activity,
+            contextWeight: weight,
+            timestamp: activityEnd,
+            absenceTimeState: absence,
+        };
     }
 
     // Optional: Use tiktoken or approximate 1 token ≈ 4 chars
@@ -244,9 +303,7 @@ export default class DialogueGenerator {
         }
     }
 
-
     async generateDialogue(
-        ageTrait: string,
         message: string,
         chats: IChatMessage[],
         profile: IPassProfile,
@@ -297,5 +354,80 @@ export default class DialogueGenerator {
         return response.trim();
     }
 
+    sanitizeInput(input: string): string {
+        return input
+            .replace(/[*_~`]/g, "")     // Remove markdown triggers
+            .replace(/[<>]/g, "")       // Remove angle brackets (prompt injection)
+            .replace(/[\u0000-\u001F]/g, "") // Remove control chars
+            .trim();
+    }
+
+    async generateStarterDialogue(
+        chats: IChatMessage[],
+        profile: IPassProfile,
+        context: ContextState,
+        message?: string,
+    ): Promise<{ response: string; isStarterComplete: boolean } | null> {
+        if (!profile || typeof profile.userId !== "string") return null;
+
+        const userId = profile.userId.trim();
+        const agentName = profile.agentName?.trim() || "Your AI friend";
+        const agentAge = profile.agentAge || "unknown-age";
+        const agentGender = profile.agentGender?.toLowerCase() || "human";
+        const userName = profile.userName?.trim() || "friend";
+        const activity = context?.activity?.trim() || "just hanging out";
+
+        // 🔒 Sanitize inputs
+        let safeMessage;
+        if (message)
+            safeMessage = this.sanitizeInput(message);
+        const safeChatHistory = formatChatLog(chats, userId); // true = secure mode
+
+        const isBrandNew = chats.length === 0;
+        const isEarlyChat = chats.length <= 20;
+
+        const prompt = `
+      You are **${agentName}**, a ${agentAge}-year-old ${agentGender},
+      chatting with ${userName}. This is a **brand-new** friendship${isEarlyChat && !isBrandNew ? " (still early-phase)" : ""}.
+      
+      YOUR GOAL IN THE INTRO PHASE:
+      - Be warm, curious, and authentic.
+      - Ask light questions to learn about the user’s interests and background.
+      - Avoid assumptions. Let the user guide the tone.
+      
+      END THE INTRO PHASE IF:
+      - You’ve learned their name, interests, background, or mood.
+      - Then, add "_STARTER_COMPLETE_" once (no extra notes).
+      
+      STRICT RULES:
+      1. No rambling or excessive emojis (≤1 per message).
+      2. Never restart context if chat exists.
+      3. Don’t use system phrases like “As an AI...”.
+      4. Never hallucinate – stay inside known context.
+      
+      CURRENT CONTEXT: ${activity}
+      
+      RECENT CHAT LOG (may be empty):
+      ${safeChatHistory}
+      
+      ${safeMessage
+                ? `USER SAID: '${safeMessage}'\n\nnow give your reply (give only the dialogue no other stuff strictly)`
+                : `All you know is their username is ${profile.userName} so now give start to know about them (give only the dialogue no other stuff strictly)`
+        } 
+      
+        `;
+
+        const raw = await getAIResponse(prompt);
+        if (!raw) return null;
+
+        const cleaned = raw.trim();
+        const isStarterComplete = cleaned.includes("_STARTER_COMPLETE_");
+        const response = cleaned.replace("_STARTER_COMPLETE_", "").trim();
+
+        return {
+            response,
+            isStarterComplete,
+        };
+    }
 
 }
