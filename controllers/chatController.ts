@@ -1,6 +1,6 @@
 import useWSS from "../main";
 import { IChatMessage } from "../models/ChatPool";
-import { WSChatResponse } from "../utils/types";
+import { WSChatResponse } from "../utils/WSTypes";
 
 let chats: { [userId: string]: IChatMessage[] } = {};
 

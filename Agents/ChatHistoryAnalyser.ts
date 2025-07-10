@@ -1,13 +1,11 @@
 import { Chat, Emotion } from "../models/ChatModels";
 import { IChatMessage } from "../models/ChatPool";
+import { Incident, Relationship } from "../models/DataTypes";
 import { BigFiveTraits, CognitiveTraits, EmotionalTraits, HumanCharacterProfile, MoralTraits, SocialTraits } from "../models/HumanProfile";
-import { Incident, MemoryModel } from "../models/MemoryModel";
-import Relationship from "../models/RelationShipModel";
 import getAIResponse from "../utils/gemini";
 import { formatChatLog } from "../utils/tools";
 
 export default class ChatHistoryAnalyser {
-
   async analyzeBigFive(messages: IChatMessage[], contactId: string): Promise<BigFiveTraits> {
     const prompt = `
       You're a psychology expert. Based on the following chat messages, rate the user's Big Five personality traits (between 0 and 1 for each):
@@ -280,7 +278,7 @@ Return strict JSON only like this format (or \`[]\` if no valid incidents):
       const known: Relationship[] = [];
       for (const person of people) {
         const exists = knownRelationships.find(r =>
-          r.targetName?.toLowerCase() === person.targetName?.toLowerCase()
+          r.name.toLowerCase() === person.name.toLowerCase()
         );
         if (exists) {
           known.push(exists);

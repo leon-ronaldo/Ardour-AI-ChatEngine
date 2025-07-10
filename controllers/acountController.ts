@@ -1,7 +1,7 @@
 import { loadData, saveData } from "../data/userData.service";
 import useWSS, { credentials } from "../main";
 import stringify, { debugLog } from "../utils/tools";
-import { AccountReqType, WSAccountRequest, WSAccountResponse } from "../utils/types";
+import { AccountReqType, WSAccountRequest, WSAccountResponse } from "../utils/WSTypes";
 import { chats } from "./chatController";
 
 export function AccountsRouter(data: WSAccountResponse) {

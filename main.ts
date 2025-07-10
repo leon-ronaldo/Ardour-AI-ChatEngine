@@ -1,6 +1,6 @@
 import dotenv, { parse } from "dotenv"
 import WebSocket from "ws"
-import { WSAuthentiacationResponse, WSAuthenticationRequest, WSBaseResponse, WSServerResponse } from "./utils/types";
+import { WSAuthentiacationResponse, WSAuthenticationRequest, WSBaseResponse, WSServerResponse } from "./utils/WSTypes";
 import stringify, { insertWithoutDuplicate } from "./utils/tools";
 import { AgentCreds, loadData, saveData } from "./data/userData.service";
 import { AccountsRouter } from "./controllers/acountController";

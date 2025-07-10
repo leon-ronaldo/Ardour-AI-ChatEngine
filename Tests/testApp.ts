@@ -1,5 +1,5 @@
 import WebSocket from "ws"
-import { WSAccountRequest, WSBaseRequest, WSBaseResponse } from '../utils/types';
+import { WSAccountRequest, WSBaseRequest, WSBaseResponse } from '../utils/WSTypes';
 import useWSS, { credentials } from '../main';
 import { IChatMessage } from '../models/ChatPool';
 import getAIResponse from '../utils/gemini';

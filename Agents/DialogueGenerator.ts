@@ -1,8 +1,7 @@
 import { IChatMessage } from "../models/ChatPool";
-import { MemoryModel } from "../models/MemoryModel";
+import { AIProfile, UserProfile } from "../models/Profiles";
 import getAIResponse from "../utils/gemini";
 import { formatChatLog } from "../utils/tools";
-import { IPassProfile } from "./Master";
 
 export type ChatCategory =
     | "StateReflection"          // Talks about current state or feeling
@@ -306,22 +305,23 @@ Return only a JSON object, no extra explanation.
     async generateDialogue(
         message: string,
         chats: IChatMessage[],
-        profile: IPassProfile,
+        userProfile: UserProfile,
+        AIProfile: AIProfile,
         currentContext: ContextState,
     ): Promise<string | null> {
         // 1️⃣ Classify the incoming message
         const classified = await this.classifyChatCategory(message);
         if (!classified) return null;
 
-        const { requiresContext } = classified;
+        const { requiresContext, category } = classified;
 
         // 3️⃣ Grab the recent sliding‑window chat history
         const history = this.getRecentChatWindow(chats, 30, 1800); // ~1 800 tokens max
 
         // 4️⃣ Prompt the LLM to reply like a human, with strict rules
         const prompt = `
-      You are **${profile.agentName}**, a ${profile.agentAge}-year-old friendly ${profile.agentGender} 
-      chatting with ${profile.userName}, a ${profile.agentAge}-year-old ${profile.agentGender}, your close friend.
+      You are **${AIProfile.name}**, a ${AIProfile.age}-year-old ${AIProfile.lifeTrait} ${AIProfile.gender} 
+      chatting with ${userProfile.name}, a ${userProfile.age && `${userProfile.age}-year-old`} ${userProfile.gender}, your ${userProfile.relationShip?.role}.
       
       STRICT BEHAVIOR RULES:
       1. You are part of an ongoing chat. **Do NOT restart context** each reply.
@@ -340,7 +340,7 @@ Return only a JSON object, no extra explanation.
       ${requiresContext ? `You are currently: ${currentContext?.activity}` : "No special context needed"}
       
       --- RECENT CHAT HISTORY ---
-      ${formatChatLog(history, profile.userId!)}
+      ${formatChatLog(history, userProfile.id)}
       
       --- USER MESSAGE ---
       "${message}"
@@ -364,17 +364,17 @@ Return only a JSON object, no extra explanation.
 
     async generateStarterDialogue(
         chats: IChatMessage[],
-        profile: IPassProfile,
+        userProfile: UserProfile,
+        agentProfile: AIProfile,
         context: ContextState,
         message?: string,
     ): Promise<{ response: string; isStarterComplete: boolean } | null> {
-        if (!profile || typeof profile.userId !== "string") return null;
 
-        const userId = profile.userId.trim();
-        const agentName = profile.agentName?.trim() || "Your AI friend";
-        const agentAge = profile.agentAge || "unknown-age";
-        const agentGender = profile.agentGender?.toLowerCase() || "human";
-        const userName = profile.userName?.trim() || "friend";
+        const userId = userProfile.id.trim();
+        const agentName = agentProfile.name.trim();
+        const agentAge = agentProfile.age;
+        const agentGender = agentProfile.gender;
+        const userName = userProfile.name;
         const activity = context?.activity?.trim() || "just hanging out";
 
         // 🔒 Sanitize inputs
@@ -411,18 +411,23 @@ Return only a JSON object, no extra explanation.
       ${safeChatHistory}
       
       ${safeMessage
-                ? `USER SAID: '${safeMessage}'\n\nnow give your reply (give only the dialogue no other stuff strictly)`
-                : `All you know is their username is ${profile.userName} so now give start to know about them (give only the dialogue no other stuff strictly)`
-        } 
+                ? `USER SAID: '${safeMessage}'\n\nnow give your reply (give the dialogue in the following structure strictly)`
+                : `All you know is their username is ${userProfile.name} so now give start to know about them (give the dialogue in the following structure strictly)`
+            } 
+
+    {
+        "dialogue": the dialogue,
+        "knowCompletelyAboutThePerson": boolean (true if enough information is gathered like name, age, living, gender, occupation, life, etc.)
+    }
       
         `;
 
         const raw = await getAIResponse(prompt);
         if (!raw) return null;
 
-        const cleaned = raw.trim();
-        const isStarterComplete = cleaned.includes("_STARTER_COMPLETE_");
-        const response = cleaned.replace("_STARTER_COMPLETE_", "").trim();
+        const cleaned = JSON.parse(raw.trim());
+        const isStarterComplete = cleaned.knowCompletelyAboutThePerson ?? false;
+        const response = cleaned.dialogue ?? "bro everything messed up";
 
         return {
             response,

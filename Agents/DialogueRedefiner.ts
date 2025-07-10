@@ -1,6 +1,5 @@
 import getAIResponse from "../utils/gemini";
 import { IChatMessage } from "../models/ChatPool";
-import { MemoryModel } from "../models/MemoryModel";
 
 export default class DialogueRedefiner {
 
