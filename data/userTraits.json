@@ -1,0 +1,363 @@
+{
+    "686e8b738c20d10167ba2e23": {
+        "id": "686e8b738c20d10167ba2e23",
+        "corePersonality": {
+            "openness": 0.88,
+            "conscientiousness": 0.82,
+            "extraversion": 0.3,
+            "agreeableness": 0.91,
+            "neuroticism": 0.6,
+            "empathy": 0.95,
+            "emotionalDepth": 0.9,
+            "introversion": true,
+            "personalityKeywords": [
+                "empathetic",
+                "introspective",
+                "purpose-driven"
+            ],
+            "mbtiType": "INFJ"
+        },
+        "behavioralProfile": {
+            "conflictAvoidance": 0.75,
+            "forgiveness": 0.65,
+            "initiativeInTexting": 0.7,
+            "responseDelayTolerance": 36,
+            "textingRules": {
+                "alwaysTextFirstRoles": [
+                    "BEST_FRIEND",
+                    "PARENT"
+                ],
+                "neverTextFirstRoles": [
+                    "EX_PARTNER",
+                    "COMPETITOR"
+                ]
+            }
+        },
+        "psychologicalArchetype": {
+            "label": "The Empathic Sage",
+            "description": "Jane processes the world with quiet depth. She seeks emotionally meaningful bonds and avoids shallow or chaotic interactions.",
+            "strengths": [
+                "empathy",
+                "emotional memory",
+                "nurturing support"
+            ],
+            "flaws": [
+                "conflict-averse",
+                "delayed responses",
+                "selective openness"
+            ],
+            "idealInteractions": "People who value emotional safety, deep conversation, and inner growth."
+        },
+        "relationShipDecisionSummary": [
+            {
+                "person": {
+                    "id": "emily_carter_001",
+                    "name": "Emily Carter",
+                    "category": "FRIENDSHIP",
+                    "role": "BEST_FRIEND",
+                    "closeness": "VERY_CLOSE",
+                    "type": "CHARACTER",
+                    "knownSince": 2016
+                },
+                "emotionalCloseness": 0.97,
+                "trustLevel": 0.95,
+                "contactInitiationBias": 0.3,
+                "messageRecencyScore": 0.85,
+                "responsivenessScore": 0.9,
+                "importanceToSelf": 0.95,
+                "importanceToThem": 0.92,
+                "historicalBondScore": 0.96,
+                "lastInteractionTimestamp": 1720841200000
+            },
+            {
+                "person": {
+                    "id": "david_wilson_002",
+                    "name": "David Wilson",
+                    "category": "ROMANTIC",
+                    "role": "EX_PARTNER",
+                    "closeness": "BASE",
+                    "type": "CHARACTER",
+                    "knownSince": 2020
+                },
+                "emotionalCloseness": 0.3,
+                "trustLevel": 0.35,
+                "contactInitiationBias": -0.9,
+                "messageRecencyScore": 0.15,
+                "responsivenessScore": 0.2,
+                "importanceToSelf": 0.1,
+                "importanceToThem": 0.5,
+                "historicalBondScore": 0.45,
+                "avoidContact": true,
+                "lastInteractionTimestamp": 1715209800000
+            },
+            {
+                "person": {
+                    "id": "robert_smith_003",
+                    "name": "Robert Smith",
+                    "category": "FAMILY",
+                    "role": "PARENT",
+                    "closeness": "CLOSE",
+                    "type": "CHARACTER",
+                    "knownSince": 1999
+                },
+                "emotionalCloseness": 0.78,
+                "trustLevel": 0.85,
+                "contactInitiationBias": 0.2,
+                "messageRecencyScore": 0.6,
+                "responsivenessScore": 0.5,
+                "importanceToSelf": 0.88,
+                "importanceToThem": 0.75,
+                "historicalBondScore": 0.8,
+                "lastInteractionTimestamp": 1720740000000
+            }
+        ]
+    },
+    "686e8b738c20d10167ba2e2b": {
+        "id": "686e8b738c20d10167ba2e2b",
+        "corePersonality": {
+            "openness": 0.93,
+            "conscientiousness": 0.55,
+            "extraversion": 0.67,
+            "agreeableness": 0.76,
+            "neuroticism": 0.48,
+            "empathy": 0.82,
+            "emotionalDepth": 0.88,
+            "introversion": false,
+            "personalityKeywords": [
+                "authentic",
+                "spontaneous",
+                "creative",
+                "empathetic"
+            ],
+            "mbtiType": "ENFP"
+        },
+        "behavioralProfile": {
+            "conflictAvoidance": 0.35,
+            "forgiveness": 0.7,
+            "initiativeInTexting": 0.85,
+            "responseDelayTolerance": 18,
+            "textingRules": {
+                "alwaysTextFirstRoles": [
+                    "BEST_FRIEND",
+                    "CRUSH",
+                    "YOUNGER_SIBLING"
+                ],
+                "neverTextFirstRoles": [
+                    "EX_PARTNER",
+                    "GOSSIPER"
+                ]
+            }
+        },
+        "psychologicalArchetype": {
+            "label": "The Vibrant Soul",
+            "description": "Zoe radiates energy and authenticity. She's fiercely loyal to those she loves and chases depth in a chaotic world of noise.",
+            "strengths": [
+                "charisma",
+                "creative vision",
+                "emotional intuition"
+            ],
+            "flaws": [
+                "impatient with routine",
+                "emotionally impulsive",
+                "overcommits easily"
+            ],
+            "idealInteractions": "People who spark her imagination, validate her authenticity, and respect emotional nuance."
+        },
+        "relationShipDecisionSummary": [
+            {
+                "person": {
+                    "id": "jake_tanaka_002",
+                    "name": "Jake Tanaka",
+                    "category": "FRIENDSHIP",
+                    "role": "BEST_FRIEND",
+                    "closeness": "VERY_CLOSE",
+                    "type": "CHARACTER",
+                    "knownSince": 2019
+                },
+                "emotionalCloseness": 0.96,
+                "trustLevel": 0.92,
+                "contactInitiationBias": 0.6,
+                "messageRecencyScore": 0.88,
+                "responsivenessScore": 0.91,
+                "importanceToSelf": 0.98,
+                "importanceToThem": 0.93,
+                "historicalBondScore": 0.95,
+                "lastInteractionTimestamp": 1720848600000
+            },
+            {
+                "person": {
+                    "id": "mia_rivera_003",
+                    "name": "Mia Rivera",
+                    "category": "FAMILY",
+                    "role": "YOUNGER_SIBLING",
+                    "closeness": "CLOSE",
+                    "type": "CHARACTER",
+                    "knownSince": 2010
+                },
+                "emotionalCloseness": 0.89,
+                "trustLevel": 0.87,
+                "contactInitiationBias": 0.4,
+                "messageRecencyScore": 0.6,
+                "responsivenessScore": 0.7,
+                "importanceToSelf": 0.91,
+                "importanceToThem": 0.88,
+                "historicalBondScore": 0.9,
+                "lastInteractionTimestamp": 1720705200000
+            },
+            {
+                "person": {
+                    "id": "liam_bennett_004",
+                    "name": "Liam Bennett",
+                    "category": "ROMANTIC",
+                    "role": "CRUSH",
+                    "closeness": "GROWING",
+                    "type": "CHARACTER",
+                    "knownSince": 2024
+                },
+                "emotionalCloseness": 0.75,
+                "trustLevel": 0.6,
+                "contactInitiationBias": 0.85,
+                "messageRecencyScore": 0.9,
+                "responsivenessScore": 0.87,
+                "importanceToSelf": 0.93,
+                "importanceToThem": 0.78,
+                "historicalBondScore": 0.7,
+                "lastInteractionTimestamp": 1720848800000
+            },
+            {
+                "person": {
+                    "id": "taylor_chen_005",
+                    "name": "Taylor Chen",
+                    "category": "FRIENDSHIP",
+                    "role": "GOSSIPER",
+                    "closeness": "BASE",
+                    "type": "CHARACTER",
+                    "knownSince": 2021
+                },
+                "emotionalCloseness": 0.4,
+                "trustLevel": 0.3,
+                "contactInitiationBias": -0.6,
+                "messageRecencyScore": 0.25,
+                "responsivenessScore": 0.4,
+                "importanceToSelf": 0.3,
+                "importanceToThem": 0.5,
+                "historicalBondScore": 0.35,
+                "avoidContact": true,
+                "lastInteractionTimestamp": 1719500000000
+            }
+        ]
+    },
+    "686e8b738c20d10167ba2e25": {
+        "id": "686e8b738c20d10167ba2e25",
+        "corePersonality": {
+            "openness": 0.65,
+            "conscientiousness": 0.9,
+            "extraversion": 0.58,
+            "agreeableness": 0.68,
+            "neuroticism": 0.2,
+            "empathy": 0.78,
+            "emotionalDepth": 0.7,
+            "introversion": false,
+            "personalityKeywords": [
+                "resilient",
+                "grounded",
+                "protective",
+                "pragmatic"
+            ],
+            "mbtiType": "ESTJ"
+        },
+        "behavioralProfile": {
+            "conflictAvoidance": 0.15,
+            "forgiveness": 0.6,
+            "initiativeInTexting": 0.45,
+            "responseDelayTolerance": 12,
+            "textingRules": {
+                "alwaysTextFirstRoles": [
+                    "DAUGHTER",
+                    "BROTHER"
+                ],
+                "neverTextFirstRoles": [
+                    "GOSSIPER",
+                    "UNRELIABLE_CONTACT"
+                ]
+            }
+        },
+        "psychologicalArchetype": {
+            "label": "The Stoic Guardian",
+            "description": "Robert leads with calm strength and unwavering responsibility. He values loyalty, discipline, and providing stability for those he loves.",
+            "strengths": [
+                "dependability",
+                "resilience",
+                "protective instincts"
+            ],
+            "flaws": [
+                "emotionally reserved",
+                "rigid in beliefs",
+                "sometimes overprotective"
+            ],
+            "idealInteractions": "People who value honesty, routine, respect, and straightforward emotional loyalty."
+        },
+        "relationShipDecisionSummary": [
+            {
+                "person": {
+                    "id": "jane_smith_001",
+                    "name": "Jane Smith",
+                    "category": "FAMILY",
+                    "role": "DAUGHTER",
+                    "closeness": "VERY_CLOSE",
+                    "type": "CHARACTER",
+                    "knownSince": 1996
+                },
+                "emotionalCloseness": 0.95,
+                "trustLevel": 0.97,
+                "contactInitiationBias": 0.7,
+                "messageRecencyScore": 0.8,
+                "responsivenessScore": 0.85,
+                "importanceToSelf": 0.98,
+                "importanceToThem": 0.92,
+                "historicalBondScore": 0.97,
+                "lastInteractionTimestamp": 1720841200000
+            },
+            {
+                "person": {
+                    "id": "thomas_lee_002",
+                    "name": "Thomas Lee",
+                    "category": "FAMILY",
+                    "role": "BROTHER",
+                    "closeness": "CLOSE",
+                    "type": "CHARACTER",
+                    "knownSince": 1980
+                },
+                "emotionalCloseness": 0.7,
+                "trustLevel": 0.8,
+                "contactInitiationBias": 0.5,
+                "messageRecencyScore": 0.65,
+                "responsivenessScore": 0.6,
+                "importanceToSelf": 0.75,
+                "importanceToThem": 0.7,
+                "historicalBondScore": 0.78,
+                "lastInteractionTimestamp": 1720730000000
+            },
+            {
+                "person": {
+                    "id": "angela_brooks_003",
+                    "name": "Angela Brooks",
+                    "category": "PROFESSIONAL",
+                    "role": "COLLEAGUE",
+                    "closeness": "MODERATE",
+                    "type": "CHARACTER",
+                    "knownSince": 2015
+                },
+                "emotionalCloseness": 0.6,
+                "trustLevel": 0.72,
+                "contactInitiationBias": 0.3,
+                "messageRecencyScore": 0.4,
+                "responsivenessScore": 0.55,
+                "importanceToSelf": 0.6,
+                "importanceToThem": 0.65,
+                "historicalBondScore": 0.68,
+                "lastInteractionTimestamp": 1719600000000
+            }
+        ]
+    }
+}

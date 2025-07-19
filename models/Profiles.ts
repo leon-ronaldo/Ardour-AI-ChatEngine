@@ -1,4 +1,6 @@
-import { Incident, LifeStages, PersonalTrait, Relationship } from "./DataTypes";
+import { BehavioralProfile, ContactDecisionMatrix, CorePersonality, PsychologicalArchetype, RelationshipDecisionSummary } from "./CharacterTraits";
+import { DayRoutine, Incident, LifeStages, PersonalTrait, RoutineAction } from "./PersonalTraits";
+import { Relationship } from "./RelationShip";
 
 export interface AIProfile {
     name: string;
@@ -16,6 +18,7 @@ export interface AIProfile {
     incidents: Incident[];
     people: Relationship[];
     lifeTrait: string;
+    baseLivingRoutine: DayRoutine;
 }
 
 export interface UserProfile {
@@ -23,10 +26,20 @@ export interface UserProfile {
     age?: number | string;
     id: string;
     gender?: "male" | "female";
-    lifeStages?: LifeStages;
-    personalTraits?: PersonalTrait[];
-    incidents?: Incident[];
-    people?: Relationship[];
+    lifeStages: LifeStages;
+    personalTraits: PersonalTrait[];
+    incidents: Incident[];
+    people: Relationship[];
     lifeTrait?: string;
-    relationShip?: Relationship;
+    relationShip: Relationship;
+    corePersonality: CorePersonality;
+    behavorialProfile: BehavioralProfile;
+}
+
+export interface AITrait {
+    id: string;
+    corePersonality: CorePersonality;
+    behavioralProfile: BehavioralProfile;
+    psychologicalArchetype: PsychologicalArchetype;
+    relationShipDecisionSummary: RelationshipDecisionSummary[];
 }

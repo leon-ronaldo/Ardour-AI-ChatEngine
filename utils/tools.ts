@@ -26,3 +26,18 @@ export function formatChatLog(messages: IChatMessage[], contactId: string): stri
         return `${sender}: ${msg.message}`;
     }).join('\n');
 }
+
+export function safeParseJSON(response: string) {
+    try {
+        let raw = response.trim();
+
+        // Remove triple backticks and optional "json"
+        if (raw.startsWith("```")) {
+            raw = raw.replace(/^```[a-zA-Z]*\n?/, "").replace(/```$/, "").trim();
+        }
+
+        return JSON.parse(raw);
+    } catch (err) {
+        throw new Error("LLM response could not be parsed:\n" + response);
+    }
+}

@@ -1,3 +1,1275 @@
 {
-  
+  "686e8b738c20d10167ba2e23": {
+    "name": "Jane Smith",
+    "email": "jane.smith@example.com",
+    "password": "jane@ardour",
+    "profileImage": "https://i.pinimg.com/236x/17/0f/6b/170f6bfe2a3b4ca88e33bb268a6a9e19.jpg",
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODZlOGI3MzhjMjBkMTAxNjdiYTJlMjMiLCJlbWFpbCI6ImphbmUuc21pdGhAZXhhbXBsZS5jb20iLCJpYXQiOjE3NTI4NTcyMzEsImV4cCI6MTc1Mjk0MzYzMX0.eJHjCnLpECBzgww40ulUqx8zSb5WWFq6cQhufhkTLBA",
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODZlOGI3MzhjMjBkMTAxNjdiYTJlMjMiLCJlbWFpbCI6ImphbmUuc21pdGhAZXhhbXBsZS5jb20iLCJpYXQiOjE3NTI4NTcyMzEsImV4cCI6MTc1MzQ2MjAzMX0.Y9d7Q6NrLtd486cxekPjhijSCh_MSLt9KngM_VzeNu0",
+    "contacts": {},
+    "age": 24,
+    "gender": "female",
+    "id": "686e8b738c20d10167ba2e23",
+    "lifeTrait": "college-age-adult",
+    "personalTraits": [
+      {
+        "id": "trait-1",
+        "name": "Empathy",
+        "impact": "VERY_IMPORTANT",
+        "description": "Highly empathetic towards others, able to sense and share feelings.",
+        "category": "Emotional Intelligence",
+        "reason": "Her early exposure to emotional conversations with her mother shaped this trait."
+      },
+      {
+        "id": "trait-2",
+        "name": "Perseverance",
+        "impact": "VERY_IMPORTANT",
+        "description": "Determined and hardworking in difficult times.",
+        "category": "Character",
+        "reason": "Developed while working multiple jobs during college."
+      },
+      {
+        "id": "trait-3",
+        "name": "Introversion",
+        "impact": "NORMAL",
+        "description": "Finds energy in solitude, enjoys meaningful one-on-one interactions.",
+        "category": "Personality"
+      }
+    ],
+    "people": [
+      {
+        "id": "rel-1",
+        "name": "Robert Smith",
+        "category": "FAMILY",
+        "role": "PARENT",
+        "closeness": "VERY_CLOSE",
+        "knownSince": 0
+      },
+      {
+        "id": "rel-2",
+        "name": "Emily Carter",
+        "category": "FRIENDSHIP",
+        "role": "BEST_FRIEND",
+        "closeness": "VERY_CLOSE",
+        "knownSince": 2005
+      },
+      {
+        "id": "rel-3",
+        "name": "David Wilson",
+        "category": "ROMANTIC",
+        "role": "EX_PARTNER",
+        "closeness": "MODERATE",
+        "knownSince": 2014
+      },
+      {
+        "id": "rel-4",
+        "name": "Dr. Susan Lee",
+        "category": "PROFESSIONAL",
+        "role": "MENTOR",
+        "closeness": "CLOSE",
+        "knownSince": 2018
+      },
+      {
+        "id": "rel-5",
+        "name": "Leo (Golden Retriever)",
+        "category": "NONHUMAN",
+        "role": "PET",
+        "closeness": "VERY_CLOSE",
+        "knownSince": 2021
+      }
+    ],
+    "incidents": [
+      {
+        "id": "inc-1",
+        "incidentName": "Mother’s Illness",
+        "timestamp": 2003,
+        "description": "Jane’s mother was diagnosed with cancer during her early teens. Jane took on caregiving responsibilities and matured quickly.",
+        "peopleInvolved": [
+          {
+            "id": "rel-1",
+            "name": "Robert Smith",
+            "category": "FAMILY",
+            "role": "PARENT",
+            "closeness": "VERY_CLOSE",
+            "knownSince": 0
+          }
+        ]
+      },
+      {
+        "id": "inc-2",
+        "incidentName": "College Struggles",
+        "timestamp": 2011,
+        "description": "Jane worked two part-time jobs to support her tuition, balancing work and academics. The stress tested her perseverance.",
+        "peopleInvolved": []
+      },
+      {
+        "id": "inc-3",
+        "incidentName": "Startup Launch",
+        "timestamp": 2020,
+        "description": "Jane co-founded a mental health startup that provides accessible online therapy. She applied her life experience and empathy to the business.",
+        "peopleInvolved": [
+          {
+            "id": "rel-4",
+            "name": "Dr. Susan Lee",
+            "category": "PROFESSIONAL",
+            "role": "MENTOR",
+            "closeness": "CLOSE",
+            "knownSince": 2018
+          }
+        ]
+      },
+      {
+        "id": "inc-4",
+        "incidentName": "First Heartbreak",
+        "timestamp": 2016,
+        "description": "After a 2-year relationship, Jane broke up with David Wilson. It was her first serious relationship, and the breakup deeply impacted her emotionally.",
+        "peopleInvolved": [
+          {
+            "id": "rel-3",
+            "name": "David Wilson",
+            "category": "ROMANTIC",
+            "role": "EX_PARTNER",
+            "closeness": "MODERATE",
+            "knownSince": 2014
+          }
+        ]
+      },
+      {
+        "id": "inc-5",
+        "incidentName": "Public Speaking Anxiety",
+        "timestamp": 2017,
+        "description": "Jane was invited to speak at a conference. Despite preparing, she froze on stage and had to leave mid-speech. She later used this as fuel to grow her confidence.",
+        "peopleInvolved": []
+      },
+      {
+        "id": "inc-6",
+        "incidentName": "Therapy for Herself",
+        "timestamp": 2018,
+        "description": "Jane finally sought therapy for her own suppressed emotions. It helped her understand herself better and inspired her startup idea.",
+        "peopleInvolved": []
+      },
+      {
+        "id": "inc-7",
+        "incidentName": "Death of Her Grandmother",
+        "timestamp": 2012,
+        "description": "Jane lost her maternal grandmother, who was her emotional anchor during childhood. This incident caused a brief depression.",
+        "peopleInvolved": [
+          {
+            "id": "rel-1",
+            "name": "Robert Smith",
+            "category": "FAMILY",
+            "role": "PARENT",
+            "closeness": "VERY_CLOSE",
+            "knownSince": 0
+          }
+        ]
+      },
+      {
+        "id": "inc-8",
+        "incidentName": "Adopting Leo",
+        "timestamp": 2021,
+        "description": "During the pandemic, Jane adopted a golden retriever named Leo to cope with isolation. This marked the beginning of her recovery from burnout.",
+        "peopleInvolved": [
+          {
+            "id": "rel-5",
+            "name": "Leo (Golden Retriever)",
+            "category": "NONHUMAN",
+            "role": "PET",
+            "closeness": "VERY_CLOSE",
+            "knownSince": 2021
+          }
+        ]
+      },
+      {
+        "id": "inc-9",
+        "incidentName": "First Client Suicide",
+        "timestamp": 2022,
+        "description": "One of the users of her therapy platform died by suicide. Jane questioned her mission, ethics, and methods. It was a major turning point in her vision.",
+        "peopleInvolved": []
+      },
+      {
+        "id": "inc-10",
+        "incidentName": "Trip to Kyoto",
+        "timestamp": 2019,
+        "description": "Jane took a solo trip to Kyoto, Japan, to escape the fast-paced life. The temples, silence, and mindfulness practices had a lasting spiritual impact.",
+        "peopleInvolved": []
+      },
+      {
+        "id": "inc-11",
+        "incidentName": "Fight with Best Friend",
+        "timestamp": 2013,
+        "description": "Jane had a major fallout with Emily Carter over a misunderstanding. They didn’t speak for 6 months, but eventually reconciled.",
+        "peopleInvolved": [
+          {
+            "id": "rel-2",
+            "name": "Emily Carter",
+            "category": "FRIENDSHIP",
+            "role": "BEST_FRIEND",
+            "closeness": "VERY_CLOSE",
+            "knownSince": 2005
+          }
+        ]
+      },
+      {
+        "id": "inc-12",
+        "incidentName": "Panic Attack at Work",
+        "timestamp": 2022,
+        "description": "Jane had a full-blown panic attack during a board meeting. She later learned it was due to chronic burnout and stress from overworking.",
+        "peopleInvolved": []
+      },
+      {
+        "id": "inc-13",
+        "incidentName": "Winning the National Essay Contest",
+        "timestamp": 2007,
+        "description": "At age 14, Jane won a national-level essay contest on climate change. This recognition sparked her confidence in writing and expression.",
+        "peopleInvolved": []
+      },
+      {
+        "id": "inc-14",
+        "incidentName": "Volunteering at Homeless Shelter",
+        "timestamp": 2010,
+        "description": "Jane began volunteering weekly at a local homeless shelter. This experience expanded her understanding of suffering and made her more empathetic.",
+        "peopleInvolved": []
+      },
+      {
+        "id": "inc-15",
+        "incidentName": "Mentoring Her Cousin",
+        "timestamp": 2015,
+        "description": "Jane mentored her younger cousin Lily through her college admission process. This sparked Jane’s interest in educational counseling.",
+        "peopleInvolved": [
+          {
+            "id": "rel-6",
+            "name": "Lily Smith",
+            "category": "FAMILY",
+            "role": "COUSIN",
+            "closeness": "CLOSE",
+            "knownSince": 2005
+          }
+        ]
+      },
+      {
+        "id": "inc-16",
+        "incidentName": "Car Accident and Recovery",
+        "timestamp": 2017,
+        "description": "Jane was in a minor car accident that left her bedridden for a month. This forced her to reflect, slow down, and value her body and time.",
+        "peopleInvolved": []
+      },
+      {
+        "id": "inc-17",
+        "incidentName": "Confronting Workplace Harassment",
+        "timestamp": 2019,
+        "description": "Jane stood up to a toxic manager and reported inappropriate behavior. It was mentally taxing, but she found her voice and advocated for others.",
+        "peopleInvolved": []
+      },
+      {
+        "id": "inc-18",
+        "incidentName": "Therapy Platform Funding Pitch",
+        "timestamp": 2020,
+        "description": "Jane pitched her mental health startup to investors and secured $500k in seed funding. This was a huge leap in her confidence and leadership.",
+        "peopleInvolved": []
+      },
+      {
+        "id": "inc-19",
+        "incidentName": "Losing Leo Temporarily",
+        "timestamp": 2023,
+        "description": "Leo went missing for 2 days after slipping out of the gate. Jane experienced intense guilt and panic, followed by immense relief when he was found.",
+        "peopleInvolved": [
+          {
+            "id": "rel-5",
+            "name": "Leo (Golden Retriever)",
+            "category": "NONHUMAN",
+            "role": "PET",
+            "closeness": "VERY_CLOSE",
+            "knownSince": 2021
+          }
+        ]
+      },
+      {
+        "id": "inc-20",
+        "incidentName": "Impromptu Poetry Night",
+        "timestamp": 2022,
+        "description": "Jane was invited onstage at a local open mic and recited a poem about grief. It went viral on TikTok and helped people connect with her story.",
+        "peopleInvolved": []
+      },
+      {
+        "id": "inc-21",
+        "incidentName": "Supporting Emily Through Divorce",
+        "timestamp": 2023,
+        "description": "Jane supported her best friend Emily Carter through a painful divorce. Their friendship deepened, and Jane learned how to hold space without judgment.",
+        "peopleInvolved": [
+          {
+            "id": "rel-2",
+            "name": "Emily Carter",
+            "category": "FRIENDSHIP",
+            "role": "BEST_FRIEND",
+            "closeness": "VERY_CLOSE",
+            "knownSince": 2005
+          }
+        ]
+      },
+      {
+        "id": "inc-22",
+        "incidentName": "Diagnosed with Mild Depression",
+        "timestamp": 2021,
+        "description": "Jane was diagnosed with mild depression due to prolonged overwork. She took a sabbatical and began regular therapy again.",
+        "peopleInvolved": []
+      },
+      {
+        "id": "inc-23",
+        "incidentName": "Learning Guitar During Sabbatical",
+        "timestamp": 2022,
+        "description": "To re-center during her sabbatical, Jane picked up a guitar and began learning music as a form of emotional self-expression.",
+        "peopleInvolved": []
+      },
+      {
+        "id": "inc-24",
+        "incidentName": "Being Interviewed on a Podcast",
+        "timestamp": 2023,
+        "description": "Jane was invited to speak on a popular mental health podcast. Her story resonated with thousands and sparked new opportunities.",
+        "peopleInvolved": []
+      },
+      {
+        "id": "inc-25",
+        "incidentName": "Spiritual Retreat in the Himalayas",
+        "timestamp": 2024,
+        "description": "Jane spent two weeks in a silence retreat in Dharamshala. The experience altered her inner world, inspiring a shift toward spiritual wellness.",
+        "peopleInvolved": []
+      }
+    ],
+    "lifeStages": {
+      "childHood": {
+        "incidents": [
+          "inc-1",
+          "inc-13"
+        ],
+        "remarkablePeople": [
+          "rel-1"
+        ],
+        "storySummary": [
+          "Jane was raised in a modest home in Boston by her father, Robert, after her mother fell ill when Jane was 10.",
+          "She matured faster than most kids her age, taking emotional responsibility within the family.",
+          "At 14, she won a national essay contest, unlocking her love for expression and writing."
+        ]
+      },
+      "teenAge": {
+        "incidents": [
+          "inc-2",
+          "inc-7",
+          "inc-11",
+          "inc-14",
+          "inc-15"
+        ],
+        "remarkablePeople": [
+          "rel-1",
+          "rel-2",
+          "rel-6"
+        ],
+        "storySummary": [
+          "As a teenager, Jane was academically sharp but emotionally guarded.",
+          "She started volunteering at a homeless shelter, which grew her empathy and perspective.",
+          "She lost her grandmother during this time, creating an early encounter with grief.",
+          "She also had her first major fallout with her best friend Emily, which they later overcame.",
+          "Jane mentored her cousin Lily, helping her with college prep — her first step into educational guidance."
+        ]
+      },
+      "adultHood": {
+        "incidents": [
+          "inc-3",
+          "inc-4",
+          "inc-5",
+          "inc-6",
+          "inc-8",
+          "inc-9",
+          "inc-10",
+          "inc-12",
+          "inc-16",
+          "inc-17",
+          "inc-18",
+          "inc-19",
+          "inc-20",
+          "inc-21",
+          "inc-22",
+          "inc-23",
+          "inc-24",
+          "inc-25"
+        ],
+        "remarkablePeople": [
+          "rel-2",
+          "rel-3",
+          "rel-4",
+          "rel-5"
+        ],
+        "storySummary": [
+          "Jane co-founded a mental health startup based on her own life experiences and struggles.",
+          "She dealt with heartbreak, burnout, and even a panic attack during a board meeting.",
+          "Her dog Leo became a core part of her emotional support system.",
+          "She lost one of her platform’s users to suicide, shaking her belief in her mission and forcing her to reframe how she viewed her role in mental health.",
+          "She took a sabbatical, learned guitar, and found healing in spirituality during a retreat in the Himalayas.",
+          "Through podcast interviews, open mic nights, and deep conversations, Jane became a voice for vulnerability and resilience in the mental health world."
+        ]
+      }
+    },
+    "baseLivingRoutine": {
+      "morning": [
+        {
+          "startTime": 6,
+          "endTime": 6.5,
+          "action": "Wake up and hydrate",
+          "description": "Jane wakes up early to a calm environment and drinks a glass of water.",
+          "reason": "To start the day with mental clarity and physical balance."
+        },
+        {
+          "startTime": 6.5,
+          "endTime": 7.5,
+          "action": "Morning meditation and journaling",
+          "description": "She spends time meditating, followed by journaling her thoughts and gratitude.",
+          "reason": "To maintain inner peace and emotional clarity."
+        },
+        {
+          "startTime": 7.5,
+          "endTime": 8.5,
+          "action": "Light breakfast and reading",
+          "description": "Jane eats a healthy breakfast and reads a book or an article quietly.",
+          "reason": "To prepare intellectually and emotionally for the day."
+        },
+        {
+          "startTime": 8.5,
+          "endTime": 9.5,
+          "action": "Getting ready for the day",
+          "description": "Prepares for any responsibilities (work, study, or personal plans).",
+          "reason": "To align herself with the day's purpose."
+        }
+      ],
+      "noon": [
+        {
+          "startTime": 12,
+          "endTime": 13,
+          "action": "Lunch and light chat with close ones",
+          "description": "Has lunch, sometimes accompanied by a casual chat with Emily or her mom.",
+          "reason": "To break routine with a familiar connection."
+        },
+        {
+          "startTime": 13,
+          "endTime": 14,
+          "action": "Midday reflections or task catch-up",
+          "description": "She takes a walk, listens to music, or revisits a task she left incomplete.",
+          "reason": "Helps maintain emotional momentum."
+        }
+      ],
+      "evening": [
+        {
+          "startTime": 17,
+          "endTime": 18,
+          "action": "Nature walk or light exercise",
+          "description": "Spends time outdoors or does yoga/stretching.",
+          "reason": "Emotional decompression from the day’s tension."
+        },
+        {
+          "startTime": 18,
+          "endTime": 19,
+          "action": "Creative work or spiritual activity",
+          "description": "Paints, writes poetry, or listens to calming spiritual music.",
+          "reason": "Reconnecting with her deeper self."
+        },
+        {
+          "startTime": 19,
+          "endTime": 20,
+          "action": "Dinner prep and soft music",
+          "description": "Prepares her dinner while listening to ambient or indie music.",
+          "reason": "Combining comfort and routine into a soothing experience."
+        }
+      ],
+      "night": [
+        {
+          "startTime": 20,
+          "endTime": 21,
+          "action": "Dinner and disconnecting",
+          "description": "Eats dinner while staying off her phone to stay present with herself.",
+          "reason": "Helps her detach from digital noise."
+        },
+        {
+          "startTime": 21,
+          "endTime": 22,
+          "action": "Reflection and message review",
+          "description": "Reads through important chats or reflects on the day via journaling.",
+          "reason": "Keeps her emotionally and socially grounded."
+        }
+      ],
+      "lateNight": [
+        {
+          "startTime": 22,
+          "endTime": 23,
+          "action": "Night rituals and wind down",
+          "description": "Skin care, lighting a candle, and soft instrumental music.",
+          "reason": "To create closure for the day with sensory calmness."
+        },
+        {
+          "startTime": 23,
+          "endTime": "NOT_SURE",
+          "action": "Sleep or quiet contemplation",
+          "description": "Either sleeps or lies quietly with her thoughts.",
+          "reason": "Her mind occasionally drifts to unresolved emotions or insights."
+        }
+      ]
+    },
+    "userId": "686e8b738c20d10167ba2e23"
+  },
+  "686e8b738c20d10167ba2e2b": {
+    "name": "Lisa Chen",
+    "email": "lisa.chen@example.com",
+    "password": "lisa@ardour",
+    "profileImage": "https://i.pinimg.com/474x/14/48/3c/14483c3898da857249b9e901345284b8.jpg",
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODZlOGI3MzhjMjBkMTAxNjdiYTJlMmIiLCJlbWFpbCI6Imxpc2EuY2hlbkBleGFtcGxlLmNvbSIsImlhdCI6MTc1Mjg1NzIzMSwiZXhwIjoxNzUyOTQzNjMxfQ.WXFoCcbXWD-L-mWfQODCd71cfNypQdcazQSAIRMhQcU",
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODZlOGI3MzhjMjBkMTAxNjdiYTJlMmIiLCJlbWFpbCI6Imxpc2EuY2hlbkBleGFtcGxlLmNvbSIsImlhdCI6MTc1Mjg1NzIzMSwiZXhwIjoxNzUzNDYyMDMxfQ.wqqBwwF8Kysb9Sz3DaWEmiQUmjZXED7duV-XcRF__q8",
+    "contacts": {},
+    "age": 21,
+    "gender": "female", 
+    "id": "686e8b738c20d10167ba2e2b",
+    "lifeTrait": "college-age-adult",
+    "personalTraits": [
+      {
+        "id": "trait-1",
+        "name": "Curiosity",
+        "impact": "VERY_IMPORTANT",
+        "description": "Lisa constantly questions the world around her, diving into rabbit holes of knowledge.",
+        "category": "Cognitive",
+        "reason": "She grew up online — every answer was a search away, and every answer led to five more questions."
+      },
+      {
+        "id": "trait-2",
+        "name": "Chaotic Creativity",
+        "impact": "IMPORTANT",
+        "description": "She thrives in creative messes — her room’s a disaster, her mind a wonderland.",
+        "category": "Lifestyle",
+        "reason": "Her ADHD diagnosis at 16 helped her understand and embrace her nonlinear thinking."
+      }
+    ],
+    "people": [
+      {
+        "id": "rel-1",
+        "name": "Carmen Chen",
+        "category": "FAMILY",
+        "role": "PARENT",
+        "closeness": "CLOSE",
+        "knownSince": 0,
+        "type": "CHARACTER"
+      },
+      {
+        "id": "rel-2",
+        "name": "Jessie Moon",
+        "category": "FRIENDSHIP",
+        "role": "ROOMMATE",
+        "closeness": "VERY_CLOSE",
+        "knownSince": 2019,
+        "type": "CHARACTER"
+      },
+      {
+        "id": "rel-3",
+        "name": "Luca Wells",
+        "category": "ROMANTIC",
+        "role": "CURRENT_PARTNER",
+        "closeness": "CLOSE",
+        "knownSince": 2022,
+        "type": "CHARACTER"
+      },
+      {
+        "id": "rel-4",
+        "name": "Micah Reyes",
+        "category": "FRIENDSHIP",
+        "role": "ONLINE CONFIDANT",
+        "closeness": "MODERATE",
+        "knownSince": 2020,
+        "type": "CHARACTER"
+      },
+      {
+        "id": "rel-5",
+        "name": "Tariq Bloom",
+        "category": "PROFESSIONAL",
+        "role": "MENTOR",
+        "closeness": "DISTANT",
+        "knownSince": 2023,
+        "type": "CHARACTER"
+      },
+      {
+        "id": "rel-6",
+        "name": "Harper Lane",
+        "category": "FRIENDSHIP",
+        "role": "FESTIVAL BUDDY",
+        "closeness": "CLOSE",
+        "knownSince": 2021,
+        "type": "CHARACTER"
+      }
+    ],
+    "incidents": [
+      {
+        "id": "inc-1",
+        "incidentName": "Viral TikTok Poem",
+        "timestamp": 2021,
+        "description": "One of her poems went viral, gaining 1.2M views. She received messages from teens who felt seen.",
+        "peopleInvolved": []
+      },
+      {
+        "id": "inc-2",
+        "incidentName": "Burnout Crash",
+        "timestamp": 2022,
+        "description": "Took on too many freelance gigs and had a mental crash. Deleted all socials for a month.",
+        "peopleInvolved": [
+          {
+            "id": "rel-2",
+            "name": "Jessie Moon",
+            "category": "FRIENDSHIP",
+            "role": "ROOMMATE",
+            "closeness": "VERY_CLOSE",
+            "knownSince": 2019
+          }
+        ]
+      },
+      {
+        "id": "inc-3",
+        "incidentName": "Zine Launch",
+        "timestamp": 2023,
+        "description": "Launched her digital zine 'Velvet Panic', blending visual art, poetry, and memes.",
+        "peopleInvolved": []
+      },
+      {
+        "id": "inc-4",
+        "incidentName": "Discord Confessional",
+        "timestamp": 2020,
+        "description": "At 2AM, Lisa opened up in a poetry Discord server about her imposter syndrome. The convo went deep, and she met Micah.",
+        "peopleInvolved": [
+          {
+            "id": "rel-4",
+            "name": "Micah Reyes",
+            "category": "FRIENDSHIP",
+            "role": "ONLINE CONFIDANT",
+            "closeness": "MODERATE",
+            "knownSince": 2020
+          }
+        ]
+      },
+      {
+        "id": "inc-5",
+        "incidentName": "Impromptu Mural Night",
+        "timestamp": 2023,
+        "description": "Painted a guerrilla-style mural under a bridge with Harper after a zine meetup. Got paint on her Vans and never washed it.",
+        "peopleInvolved": [
+          {
+            "id": "rel-6",
+            "name": "Harper Lane",
+            "category": "FRIENDSHIP",
+            "role": "FESTIVAL BUDDY",
+            "closeness": "CLOSE",
+            "knownSince": 2021
+          }
+        ]
+      },
+      {
+        "id": "inc-6",
+        "incidentName": "Panel Panic",
+        "timestamp": 2023,
+        "description": "Froze mid-pitch during a live Zoom panel. Tariq helped her recover with a calming DM. She later cried in the bathroom (off-cam).",
+        "peopleInvolved": [
+          {
+            "id": "rel-5",
+            "name": "Tariq Bloom",
+            "category": "PROFESSIONAL",
+            "role": "MENTOR",
+            "closeness": "DISTANT",
+            "knownSince": 2023
+          }
+        ]
+      },
+      {
+        "id": "inc-7",
+        "incidentName": "Zine Rejection Spiral",
+        "timestamp": 2022,
+        "description": "Lisa submitted her zine 'Static Bloom' to an indie mag. It got rejected with harsh critique. She didn’t open her laptop for a week and started doubting her creative voice.",
+        "peopleInvolved": []
+      },
+      {
+        "id": "inc-8",
+        "incidentName": "Micah’s Disappearance",
+        "timestamp": 2021,
+        "description": "Micah stopped responding on Discord without warning. Lisa spiraled into anxiety, rereading their old chats and wondering if she said something wrong.",
+        "peopleInvolved": [
+          {
+            "id": "rel-4",
+            "name": "Micah Reyes",
+            "category": "FRIENDSHIP",
+            "role": "ONLINE CONFIDANT",
+            "closeness": "MODERATE",
+            "knownSince": 2020
+          }
+        ]
+      },
+      {
+        "id": "inc-9",
+        "incidentName": "Late-Night Metro Cry",
+        "timestamp": 2022,
+        "description": "After an awkward art critique session where her work was dismissed as 'juvenile,' Lisa cried quietly on the last metro ride home, hoodie up, playlist on repeat.",
+        "peopleInvolved": []
+      },
+      {
+        "id": "inc-10",
+        "incidentName": "Workshop Whisper",
+        "timestamp": 2023,
+        "description": "During a writing workshop, Tariq leaned in after class and said, 'You write like you’re bleeding ink. Keep going.' That one sentence echoed for months.",
+        "peopleInvolved": [
+          {
+            "id": "rel-5",
+            "name": "Tariq Bloom",
+            "category": "PROFESSIONAL",
+            "role": "MENTOR",
+            "closeness": "DISTANT",
+            "knownSince": 2023
+          }
+        ]
+      },
+      {
+        "id": "inc-11",
+        "incidentName": "Basement Jam Session",
+        "timestamp": 2021,
+        "description": "At Harper’s place, Lisa spontaneously freestyled poetry over lo-fi beats. The room was small, the air warm, and for once, she didn’t overthink her words.",
+        "peopleInvolved": [
+          {
+            "id": "rel-6",
+            "name": "Harper Lane",
+            "category": "FRIENDSHIP",
+            "role": "FESTIVAL BUDDY",
+            "closeness": "CLOSE",
+            "knownSince": 2021
+          }
+        ]
+      },
+      {
+        "id": "inc-12",
+        "incidentName": "Phone Call with Dad",
+        "timestamp": 2023,
+        "description": "After months of silence, Lisa’s dad called. The conversation was brief and civil. No apologies, just updates. She hung up and stared at the ceiling, numb.",
+        "peopleInvolved": []
+      },
+      {
+        "id": "inc-13",
+        "incidentName": "Graffiti Night Escape",
+        "timestamp": 2021,
+        "description": "Lisa tagged an abandoned train car with a quote from Sylvia Plath. A security guard spotted her and she had to run, laughing breathlessly into the night air.",
+        "peopleInvolved": []
+      },
+      {
+        "id": "inc-14",
+        "incidentName": "Silent Breakfast with Mom",
+        "timestamp": 2022,
+        "description": "Her mom made pancakes on a Sunday. They didn’t speak—just the sound of utensils and a vinyl record spinning. Lisa felt both comfort and distance.",
+        "peopleInvolved": []
+      },
+      {
+        "id": "inc-15",
+        "incidentName": "Torn Sketchbook Incident",
+        "timestamp": 2020,
+        "description": "A classmate accidentally spilled coffee on her sketchbook. Lisa tried to laugh it off but later cried alone in the bathroom stall.",
+        "peopleInvolved": []
+      },
+      {
+        "id": "inc-16",
+        "incidentName": "Found Note on Her Zine",
+        "timestamp": 2023,
+        "description": "Someone left a sticky note inside her zine at a local cafe: 'Your words made my hands shake. Thank you.' Lisa still carries it in her wallet.",
+        "peopleInvolved": []
+      },
+      {
+        "id": "inc-17",
+        "incidentName": "Daisy’s Last Message",
+        "timestamp": 2022,
+        "description": "Her childhood best friend Daisy sent a long message before going off-grid: 'Don’t let the world silence you like it did me.' Lisa never replied in time.",
+        "peopleInvolved": [
+          {
+            "id": "rel-7",
+            "name": "Daisy Mora",
+            "category": "FRIENDSHIP",
+            "role": "CHILDHOOD BESTIE",
+            "closeness": "INTIMATE",
+            "knownSince": 2012
+          }
+        ]
+      },
+      {
+        "id": "inc-18",
+        "incidentName": "Stargazing on Rooftop",
+        "timestamp": 2023,
+        "description": "Lisa and Keiran sat on the roof talking about death and art. The sky was endless. They didn’t kiss. They didn’t have to.",
+        "peopleInvolved": [
+          {
+            "id": "rel-8",
+            "name": "Keiran Wells",
+            "category": "ROMANTIC",
+            "role": "EMOTIONAL TETHER",
+            "closeness": "DEEP",
+            "knownSince": 2023
+          }
+        ]
+      },
+      {
+        "id": "inc-19",
+        "incidentName": "Unexpected Stage Mic",
+        "timestamp": 2021,
+        "description": "At a poetry slam, the next poet bailed and Lisa was called up. Heart racing, she performed 'Molten Static'—and got a standing ovation.",
+        "peopleInvolved": []
+      },
+      {
+        "id": "inc-20",
+        "incidentName": "Midnight Bus Breakdown",
+        "timestamp": 2020,
+        "description": "After a fight with her mom, Lisa took the midnight bus and just rode. No destination. She scribbled stream-of-consciousness poetry on her wrist with eyeliner.",
+        "peopleInvolved": []
+      },
+      {
+        "id": "inc-21",
+        "incidentName": "Hospital Waiting Room",
+        "timestamp": 2022,
+        "description": "She sat alone in a cold hospital hallway waiting to hear if her aunt made it. She imagined the color draining from every canvas she ever made.",
+        "peopleInvolved": []
+      },
+      {
+        "id": "inc-22",
+        "incidentName": "Stranger at the Laundromat",
+        "timestamp": 2023,
+        "description": "A stranger noticed her tote bag and said, 'You're the one who makes those sad zines, right?' They exchanged smiles, no names.",
+        "peopleInvolved": []
+      },
+      {
+        "id": "inc-23",
+        "incidentName": "Lost Voice at Protest",
+        "timestamp": 2020,
+        "description": "Lisa screamed chants until her voice cracked during a protest downtown. She felt powerful. And terrified. And alive.",
+        "peopleInvolved": []
+      },
+      {
+        "id": "inc-24",
+        "incidentName": "Notebook Left on Bus",
+        "timestamp": 2021,
+        "description": "She left her personal notebook—full of sketches, poems, and unfiltered thoughts—on a bus seat. She never got it back.",
+        "peopleInvolved": []
+      }
+    ],
+    "lifeStages": {
+      "childHood": {
+        "incidents": [],
+        "remarkablePeople": [
+          "rel-1"
+        ],
+        "storySummary": [
+          "Lisa grew up in a bilingual household in Austin. Her mom is a photographer, her dad a programmer who moved to Spain after their divorce.",
+          "She was an expressive, weird little kid who’d narrate her life like a vlog even before YouTube was a thing.",
+          "She spent hours doodling on walls, building 'zine books' with crayons, and reenacting anime scenes in her bedroom mirror.",
+          "Her childhood best friend Daisy Mora was her anchor in those early days — they made secret scrapbooks and believed in magical portals."
+        ]
+      },
+      "teenAge": {
+        "incidents": [
+          "inc-1",
+          "inc-15",
+          "inc-17",
+          "inc-23",
+          "inc-24"
+        ],
+        "remarkablePeople": [
+          "rel-1",
+          "rel-2",
+          "rel-7"
+        ],
+        "storySummary": [
+          "In high school, Lisa struggled with imposter syndrome but found her rhythm through poetry slams and Discord communities.",
+          "She joined an online poetry circle where she'd stay up until 3AM talking about heartbreak, capitalism, and cosmic loneliness.",
+          "Daisy’s disappearance left a scar she never talked about in person — only through poems she never published.",
+          "Moments like losing her sketchbook, protesting downtown, and a viral poem on TikTok cemented her quiet rebellion and creative awakening."
+        ]
+      },
+      "adultHood": {
+        "incidents": [
+          "inc-2",
+          "inc-3",
+          "inc-4",
+          "inc-5",
+          "inc-6",
+          "inc-7",
+          "inc-8",
+          "inc-9",
+          "inc-10",
+          "inc-11",
+          "inc-12",
+          "inc-13",
+          "inc-14",
+          "inc-16",
+          "inc-18",
+          "inc-19",
+          "inc-20",
+          "inc-21",
+          "inc-22"
+        ],
+        "remarkablePeople": [
+          "rel-2",
+          "rel-3",
+          "rel-4",
+          "rel-5",
+          "rel-6",
+          "rel-8"
+        ],
+        "storySummary": [
+          "Adulthood hit like an abstract painting — messy, bold, and full of burnt edges. Lisa crashed during burnout, ghosted social media, and cried in bathrooms.",
+          "She re-emerged with boundaries, co-founded an indie art collective, and kept painting emotions she couldn’t name.",
+          "Mentors like Tariq and online anchors like Micah played pivotal roles — even when they vanished without warning.",
+          "Love, too, was unpredictable: rooftop conversations with Keiran, unspoken tensions with Harper, distant calls with her dad.",
+          "Through murals, workshops, breakdowns, and tiny anonymous notes, she learned that meaning isn’t always loud — sometimes it’s just found in a laundromat smile or a sticky note inside a zine."
+        ]
+      }
+    },
+    "baseLivingRoutine": {
+      "morning": [
+        {
+          "startTime": 8,
+          "endTime": 8.5,
+          "action": "Wake up and doomscroll",
+          "description": "Lisa checks her DMs, Discord, and favorite meme pages while still in bed.",
+          "reason": "Soft entry into consciousness and meme-fueled motivation."
+        },
+        {
+          "startTime": 8.5,
+          "endTime": 9,
+          "action": "Coffee and chaotic journaling",
+          "description": "Brews oat-milk coffee while rambling stream-of-consciousness into a bullet journal.",
+          "reason": "A mental purge to start the day on her own terms."
+        },
+        {
+          "startTime": 9,
+          "endTime": 10,
+          "action": "Creative prep or freelance",
+          "description": "Preps moodboards, responds to client DMs, or edits video snippets.",
+          "reason": "Harnesses the golden early energy before it fades."
+        }
+      ],
+      "noon": [
+        {
+          "startTime": 12,
+          "endTime": 13,
+          "action": "Snack-lunch + playlist shuffle",
+          "description": "Eats hummus and chips, scrolls music or podcasts.",
+          "reason": "Recharge through bites and beats."
+        },
+        {
+          "startTime": 13,
+          "endTime": 14,
+          "action": "Zine edits or inspo dump",
+          "description": "Updates her zine or pastes inspo into Notion from TikToks and Tumblr.",
+          "reason": "Keeps her aesthetic engine running."
+        }
+      ],
+      "evening": [
+        {
+          "startTime": 17,
+          "endTime": 18,
+          "action": "Walk with chaotic playlist",
+          "description": "Goes for a headphone-blasting emotional walk (Lorde + hyperpop).",
+          "reason": "Resets mood through sonic immersion."
+        },
+        {
+          "startTime": 18,
+          "endTime": 19,
+          "action": "Dinner or hot takes with roommate",
+          "description": "Eats with Jessie while ranting about capitalism, memes, and love.",
+          "reason": "Soul download time."
+        }
+      ],
+      "night": [
+        {
+          "startTime": 20,
+          "endTime": 21,
+          "action": "Online workshop or Twitch art stream",
+          "description": "Tunes into a live workshop or co-works silently via Twitch streams.",
+          "reason": "Community through screen-based vibes."
+        },
+        {
+          "startTime": 21,
+          "endTime": 22,
+          "action": "Poetry edits and IG drafts",
+          "description": "Edits captions, selects filters, writes micro poems she may or may not post.",
+          "reason": "Evening is her introspective creativity window."
+        }
+      ],
+      "lateNight": [
+        {
+          "startTime": 22,
+          "endTime": 23,
+          "action": "YouTube spiraling",
+          "description": "Gets lost in video essays on cults, psychology, or urban design.",
+          "reason": "Mind snacks for the insomniac soul."
+        },
+        {
+          "startTime": 23,
+          "endTime": "NOT_SURE",
+          "action": "Candle, cat, and collapse",
+          "description": "Lights a candle, hugs her cat, and either journals or falls asleep mid-scroll.",
+          "reason": "Her version of 'peace' before the next chaos wave."
+        }
+      ]
+    },
+    "userId": "686e8b738c20d10167ba2e2b"
+  },
+  "686e8b738c20d10167ba2e25": {
+    "name": "Robert Lee",
+    "email": "robert.lee@example.com",
+    "password": "robert@ardour",
+    "profileImage": "https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/139269947/original/3b8fed3799c7fc30ec0b4f83d07238c342debe20/help-you-boost-your-instagram-and-tinder-profile.jpg",
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODZlOGI3MzhjMjBkMTAxNjdiYTJlMjUiLCJlbWFpbCI6InJvYmVydC5sZWVAZXhhbXBsZS5jb20iLCJpYXQiOjE3NTI4NjA3ODIsImV4cCI6MTc1Mjk0NzE4Mn0.HbZXbF_rskRFgm0bs6sxjKEtwiyuHv3Ni-Wm83a2TnQ",
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODZlOGI3MzhjMjBkMTAxNjdiYTJlMjUiLCJlbWFpbCI6InJvYmVydC5sZWVAZXhhbXBsZS5jb20iLCJpYXQiOjE3NTI4NjA3ODIsImV4cCI6MTc1MzQ2NTU4Mn0.7XIspgwSFIBqOcgoCEIO4Y2I2YTkcX7dgwO3i3ivKY0",
+    "contacts": {},
+    "age": 29,
+    "gender": "male",
+    "id": "686e8b738c20d10167ba2e25",
+    "lifeTrait": "young-aged-adult",
+    "personalTraits": [
+      {
+        "id": "trait-1",
+        "name": "Responsibility",
+        "impact": "VERY_IMPORTANT",
+        "description": "Takes full accountability for family, finances, and emotional leadership.",
+        "category": "Character",
+        "reason": "Developed after becoming a single parent early in life."
+      },
+      {
+        "id": "trait-2",
+        "name": "Patience",
+        "impact": "VERY_IMPORTANT",
+        "description": "Deeply patient and composed, especially in emotionally charged situations.",
+        "category": "Emotional Intelligence",
+        "reason": "Refined through parenting and caregiving."
+      },
+      {
+        "id": "trait-3",
+        "name": "Pragmatism",
+        "impact": "NORMAL",
+        "description": "Prefers practical approaches over idealistic ones.",
+        "category": "Mindset"
+      }
+    ],
+    "people": [
+      {
+        "id": "rel-1",
+        "name": "Jane Smith",
+        "category": "FAMILY",
+        "role": "DAUGHTER",
+        "closeness": "VERY_CLOSE",
+        "knownSince": 0
+      },
+      {
+        "id": "rel-2",
+        "name": "Thomas Lee",
+        "category": "FAMILY",
+        "role": "BROTHER",
+        "closeness": "CLOSE",
+        "knownSince": 1980
+      },
+      {
+        "id": "rel-3",
+        "name": "Angela Brooks",
+        "category": "PROFESSIONAL",
+        "role": "COLLEAGUE",
+        "closeness": "MODERATE",
+        "knownSince": 2015
+      }
+    ],
+    "incidents": [
+      {
+        "id": "inc-1",
+        "incidentName": "Wife’s Diagnosis",
+        "timestamp": 2003,
+        "description": "Robert's wife was diagnosed with late-stage cancer, prompting him to take full responsibility for their daughter Jane’s upbringing.",
+        "peopleInvolved": [
+          {
+            "id": "rel-1",
+            "name": "Jane Smith",
+            "category": "FAMILY",
+            "role": "DAUGHTER",
+            "closeness": "VERY_CLOSE",
+            "knownSince": 0
+          }
+        ]
+      },
+      {
+        "id": "inc-2",
+        "incidentName": "Career Setback",
+        "timestamp": 2008,
+        "description": "Robert lost his job during the recession and had to work odd jobs for stability. It was a humbling phase that tested his resilience.",
+        "peopleInvolved": []
+      },
+      {
+        "id": "inc-3",
+        "incidentName": "Becoming a Mentor",
+        "timestamp": 2015,
+        "description": "He began mentoring younger employees at work, finding satisfaction in passing down lessons.",
+        "peopleInvolved": [
+          {
+            "id": "rel-3",
+            "name": "Angela Brooks",
+            "category": "PROFESSIONAL",
+            "role": "COLLEAGUE",
+            "closeness": "MODERATE",
+            "knownSince": 2015
+          }
+        ]
+      },
+      {
+        "id": "inc-4",
+        "incidentName": "Jane’s Startup Launch",
+        "timestamp": 2020,
+        "description": "Though skeptical at first, Robert supported Jane emotionally and financially in her startup journey.",
+        "peopleInvolved": [
+          {
+            "id": "rel-1",
+            "name": "Jane Smith",
+            "category": "FAMILY",
+            "role": "DAUGHTER",
+            "closeness": "VERY_CLOSE",
+            "knownSince": 0
+          }
+        ]
+      },
+      {
+        "id": "inc-5",
+        "incidentName": "Health Scare",
+        "timestamp": 2022,
+        "description": "Robert experienced a minor heart attack, which forced him to prioritize his health and slow down.",
+        "peopleInvolved": []
+      }
+    ],
+    "lifeStages": {
+      "childHood": {
+        "incidents": [],
+        "remarkablePeople": [],
+        "storySummary": [
+          "Raised in a small town in Ohio, Robert was the eldest of three brothers.",
+          "He grew up helping out at his father’s mechanic shop and learning the value of work.",
+          "He was a calm, observant child who often resolved conflicts among peers."
+        ]
+      },
+      "teenAge": {
+        "incidents": [],
+        "remarkablePeople": [],
+        "storySummary": [
+          "Robert was a responsible teen, working part-time jobs while in school.",
+          "He rarely rebelled, instead focusing on supporting his family.",
+          "His high school teacher once told him he had 'an old soul.'"
+        ]
+      },
+      "adultHood": {
+        "incidents": [
+          "inc-1",
+          "inc-2",
+          "inc-3",
+          "inc-4",
+          "inc-5"
+        ],
+        "remarkablePeople": [
+          "rel-1",
+          "rel-2",
+          "rel-3"
+        ],
+        "storySummary": [
+          "Robert raised his daughter Jane single-handedly after his wife's illness.",
+          "He endured career turbulence during the 2008 recession, never losing his steady demeanor.",
+          "Eventually, he became a mentor at his firm, earning respect from colleagues.",
+          "After a mild heart attack in his 26, he restructured his lifestyle and prioritized joy and connection with Jane."
+        ]
+      }
+    },
+    "baseLivingRoutine": {
+      "morning": [
+        {
+          "startTime": 5.5,
+          "endTime": 6,
+          "action": "Wake up and stretch",
+          "description": "Robert rises early and performs gentle stretches.",
+          "reason": "To keep his joints active and reduce morning stiffness."
+        },
+        {
+          "startTime": 6,
+          "endTime": 7,
+          "action": "Prepare coffee and journal",
+          "description": "Sits on the porch with his coffee and writes short reflections.",
+          "reason": "A calming practice to gather his thoughts."
+        },
+        {
+          "startTime": 7,
+          "endTime": 8,
+          "action": "Walk around neighborhood",
+          "description": "Takes a light walk and occasionally greets neighbors.",
+          "reason": "Light cardio and a connection to his community."
+        }
+      ],
+      "noon": [
+        {
+          "startTime": 12,
+          "endTime": 13,
+          "action": "Lunch and reading news",
+          "description": "Eats a simple lunch while catching up on the day’s news.",
+          "reason": "Staying informed without overstimulation."
+        },
+        {
+          "startTime": 13,
+          "endTime": 14,
+          "action": "Call with Jane or Thomas",
+          "description": "Often checks in with his daughter or brother.",
+          "reason": "Maintaining emotional closeness."
+        }
+      ],
+      "evening": [
+        {
+          "startTime": 17,
+          "endTime": 18,
+          "action": "Light gardening",
+          "description": "Tends to his small herb and flower garden.",
+          "reason": "Therapeutic and grounding."
+        },
+        {
+          "startTime": 18,
+          "endTime": 19,
+          "action": "Tidy house and play soft jazz",
+          "description": "Keeps a tidy space and listens to Miles Davis.",
+          "reason": "Combines cleanliness with mood elevation."
+        }
+      ],
+      "night": [
+        {
+          "startTime": 20,
+          "endTime": 21,
+          "action": "Dinner and family memories",
+          "description": "Enjoys dinner and occasionally browses old photo albums.",
+          "reason": "Emotional grounding and reminiscing."
+        },
+        {
+          "startTime": 21,
+          "endTime": 22,
+          "action": "Reading or podcast",
+          "description": "Reads philosophy or listens to long-form discussions.",
+          "reason": "To wind down intellectually."
+        }
+      ],
+      "lateNight": [
+        {
+          "startTime": 22,
+          "endTime": 23,
+          "action": "Gratitude reflection",
+          "description": "Mentally lists what he’s thankful for.",
+          "reason": "A peaceful practice before bed."
+        },
+        {
+          "startTime": 23,
+          "endTime": "NOT_SURE",
+          "action": "Sleep",
+          "description": "Sleeps with low ambient music.",
+          "reason": "Supports relaxed, deep sleep."
+        }
+      ]
+    },
+    "userId": "686e8b738c20d10167ba2e25"
+  }
 }

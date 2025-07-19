@@ -1,5 +1,3 @@
-import { AIProfile } from "./Profiles";
-
 export type RelationshipCategory =
     | 'FAMILY'
     | 'ROMANTIC'
@@ -112,7 +110,8 @@ export type RelationshipRole =
     | EducationalRelationship
     | SocialRelationship
     | SpiritualRelationship
-    | NonHumanRelationship;
+    | NonHumanRelationship
+    | "NEW_PERSON";
 
 export type RelationShipClosenessTrait =
     | "VERY_CLOSE"
@@ -130,40 +129,6 @@ export type Relationship = {
     category: RelationshipCategory;
     role: RelationshipRole;
     closeness: RelationShipClosenessTrait;
-    knownSince?: number
-}
-
-export interface Incident {
-    id: string;
-    incidentName: string;
-    timestamp: number;
-    description: string;
-    peopleInvolved: Relationship[]
-}
-
-export type PersonalTraitImpact = 
-    | "VERY_IMPORTANT"
-    | "IMPORTANT"
-    | "NOT_IMPORTANT"
-    | "NORMAL"
-
-export interface PersonalTrait {
-    id: string;
-    name: string;  
-    impact: PersonalTraitImpact;
-    description: string;
-    category: string;
-    reason?: string;
-}
-
-export interface Stage {
-    incidents: string[];
-    remarkablePeople: string[];
-    storySummary: string[];
-}
-
-export interface LifeStages {
-    childHood: Stage;
-    teenAge: Stage;
-    adultHood: Stage;
+    knownSince?: number;
+    type: "CONTACT" | "CHARACTER"
 }
