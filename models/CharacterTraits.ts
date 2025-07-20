@@ -52,6 +52,9 @@ export interface PsychologicalArchetype {
     description: string;
     coreBeliefs: string[];
     behaviorPatterns: string[];
+    strengths: string[],
+    flaws: string[],
+    idealInteractions: string
 }
 
 export interface ContactDecisionMatrix {

@@ -1,9 +1,12 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { AIProfile, AITrait } from '../models/Profiles';
+import { ChatDataSummary } from '../models/ChatModels';
+import { date, object } from 'zod';
 
 const USER_DATA_PATH = path.join(__dirname, 'users.json');
 const USER_TRAITS_DATA_PATH = path.join(__dirname, 'userTraits.json');
+const USER_SUMMARY_DATA_PATH = path.join(__dirname, 'userChatSummary.json');
 
 
 export function saveProfile(data: AIProfile) {
@@ -67,4 +70,78 @@ export function loadAllTraits(): { [id: string]: AITrait } {
     if (!fs.existsSync(USER_TRAITS_DATA_PATH)) return {};
     const raw = fs.readFileSync(USER_TRAITS_DATA_PATH, 'utf-8');
     return JSON.parse(raw);
+}
+
+// character chat summary helper
+
+export function addSummary(
+    summary: ChatDataSummary,
+    agentId: string,
+    contactId: string,
+    date: string
+) {
+    // Load all summary data
+    const allData: {
+        [agentId: string]: { [contactId: string]: { [date: string]: ChatDataSummary[] } };
+    } = fs.existsSync(USER_SUMMARY_DATA_PATH)
+            ? JSON.parse(fs.readFileSync(USER_SUMMARY_DATA_PATH, 'utf-8'))
+            : {};
+
+    // Ensure nested structure exists
+    if (!allData[agentId]) allData[agentId] = {};
+    if (!allData[agentId][contactId]) allData[agentId][contactId] = {};
+    if (!allData[agentId][contactId][date]) allData[agentId][contactId][date] = [];
+
+    // Add the summary
+    allData[agentId][contactId][date].push(summary);
+
+    // Save to file
+    fs.writeFileSync(USER_SUMMARY_DATA_PATH, JSON.stringify(allData, null, 2));
+    console.log('✅ Summary saved.');
+}
+
+export function loadSummaryForDay(
+    agentId: string,
+    contactId: string,
+    date: string
+): ChatDataSummary[] | undefined {
+    return loadAllSummaryForContact(agentId, contactId)[date];
+}
+
+export function loadSummaryForDays(
+    agentId: string,
+    contactId: string,
+    dates: string[]
+): { [date: string]: ChatDataSummary[] } | undefined {
+    const allSummaries = loadAllSummaryForContact(agentId, contactId);
+    if (!allSummaries) return undefined;
+
+    const filteredSummaries = Object.fromEntries(
+        Object.entries(allSummaries).filter(([day]) => dates.includes(day))
+    );
+
+    return filteredSummaries;
+}
+
+
+
+export function loadAllSummaryForContact(
+    agentId: string,
+    contactId: string
+): { [date: string]: ChatDataSummary[] } {
+    return loadAllSummary()[agentId]?.[contactId] ?? {};
+}
+
+
+export function loadAllSummary(): {
+    [agentId: string]: { [contactId: string]: { [date: string]: ChatDataSummary[] } };
+} {
+    if (!fs.existsSync(USER_SUMMARY_DATA_PATH)) return {};
+    const raw = fs.readFileSync(USER_SUMMARY_DATA_PATH, 'utf-8');
+    try {
+        return JSON.parse(raw);
+    } catch (e) {
+        console.error('❌ Failed to parse summary file:', e);
+        return {};
+    }
 }

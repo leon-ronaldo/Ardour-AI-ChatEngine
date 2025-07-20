@@ -1,82 +1,128 @@
-import WebSocket from "ws"
-import { WSAccountRequest, WSBaseRequest, WSBaseResponse } from '../utils/WSTypes';
-import useWSS, { credentials } from '../main';
-import { IChatMessage } from '../models/ChatPool';
-import getAIResponse from '../utils/gemini';
-import { baseChattingPrompt } from '../utils/Prompts';
-import { MemoryModel } from "../models/MemoryModel";
-import DialogueGenerator from "../Agents/DialogueGenerator";
-import DialogueRedefiner from "../Agents/DialogueRedefiner";
+import { PromptTemplate } from "@langchain/core/prompts";
+import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
+import { ConversationChain } from "langchain/chains";
+import { BufferMemory, ConversationSummaryBufferMemory, ConversationSummaryMemory } from "langchain/memory";
+import * as readline from "readline";
+import { loadProfile, loadTrait } from "../data/userData.service";
 
-const targetUserId = "684b0ab50e2c9ca1d99925c0"; // 👈 Replace this or make it dynamic
-let messages: IChatMessage[] = [];
-let memoryFragment: MemoryModel;
+// Set up readline interface
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+});
 
-// ------------------------------------------
-// 🔷 Init Entry
-// ------------------------------------------
-
-export default function InitTestApp() {
-    const wss = useWSS();
-
-    requestChatHistory(wss);
-    listenToIncomingMessages(wss);
+function ask(question: string): Promise<string> {
+    return new Promise((resolve) => rl.question(question, resolve));
 }
 
-function requestChatHistory(wss: WebSocket) {
-    const historyReq: WSAccountRequest = {
-        type: "Account",
-        reqType: "PRIVATE_CHAT_HISTORY",
-        data: { userId: targetUserId },
+const trait = loadTrait("686e8b738c20d10167ba2e2b")!
+const profile = loadProfile("686e8b738c20d10167ba2e2b")
+
+/**
+ * 686e8b738c20d10167ba2e2b - this character is called Lisa Chen
+ * A gen z girl 
+ * Look how she responds to someone who is new, approaches her
+ */
+
+const prompt = PromptTemplate.fromTemplate(`
+You are ${profile?.name}, a ${profile?.age}-year-old ${profile?.gender}.
+
+You are ${trait.psychologicalArchetype.label}, described as:
+- ${trait.psychologicalArchetype.description}
+- Strengths: ${trait.psychologicalArchetype.strengths.join(", ")}
+- Traits: ${trait.corePersonality.personalityKeywords.join(", ")}
+- MBTI: ${trait.corePersonality.mbtiType}
+- Typical texting behavior: Initiates with ${trait.behavioralProfile.textingRules.alwaysTextFirstRoles?.join(", ")}, avoids ${trait.behavioralProfile.textingRules.neverTextFirstRoles?.join(", ")}.
+
+You are texting on Instagram DM, from your phone.
+This is someone you don't know yet — a complete stranger who just messaged you.
+Respond how *you* would realistically reply: suspicious, friendly, funny, cautious — however *you* would behave as a person.
+Use your natural tone, with slang or pauses if needed, just like a real human.
+Avoid generic chatbot replies. You have emotions, curiosity, and opinions.
+You may test the other person, ignore if it's weird, or engage if you're intrigued.
+Speak like a human — not dramatic unless it's part of your personality.
+
+{history}
+Human: {input}
+${profile?.name}:
+`)
+
+const summaryPrompt = PromptTemplate.fromTemplate(`
+You are an intelligent .. who can summarize chat utterances and come to 
+
+{
+    contactId: string;
+    timePeriod: {
+        from: number,
+        to: number,
     };
-
-    wss.send(JSON.stringify(historyReq));
+    summary: string;
+    keyWords: string[];
+    mentionedPeople: string[];
+    mentionedIncidents: string[];
+    emotionDescription: string;
 }
 
-function listenToIncomingMessages(wss: WebSocket) {
+{summary}
+Human: {input}
+${profile?.name}:
+`)
 
-    wss.addEventListener("message", async (event: any) => {
-        const parsed = (JSON.parse(event.data.toString())).data;
 
-        if (parsed?.resType === "PRIVATE_CHAT_HISTORY") {
-            const res = parsed as WSBaseResponse<"Account", "PRIVATE_CHAT_HISTORY", { userId: string, messages: IChatMessage[] }>;
-            console.log(`\n📜 Chat history with ${targetUserId}:`);
-            messages = res.data.messages;
-            res.data.messages.forEach((msg: any) => printChat(msg));
-        }
 
-        if (parsed?.resType === "PRIVATE_CHAT_MESSAGE") {
-            const res = parsed as WSBaseResponse<"Chat", "PRIVATE_CHAT_MESSAGE", IChatMessage>;
-            printChat(res.data);
-        }
+// Main chat setup
+async function run() {
+    // 🧠 Create LLM instance (OpenAI here – replace with your LLM if different)
+    const llm = new ChatGoogleGenerativeAI({
+        model: "gemini-2.5-flash", // or "gemini-1.5-pro", etc.
+        apiKey: "AIzaSyBMlGsH4vA9gcEimwnOyMTAFcPZ33J3akI",
+        temperature: 0.7,
     });
+
+    // 🧠 Setup ConversationSummaryMemory
+    const memory = new BufferMemory({
+        memoryKey: "history",
+    });
+
+    const summaryMemory = new BufferMemory({
+        memoryKey: "summary",
+    })
+
+    const summarizer = new ConversationChain({
+        llm,
+        memory: memory,
+        prompt: summaryPrompt
+    })
+
+    // 🤖 Create the conversation chain
+    const chain = new ConversationChain({
+        llm: llm,
+        memory: memory,
+        prompt
+    });
+
+    console.log("Start chatting with the person! (type 'exit' to quit)\n");
+
+    // Chat loop
+    while (true) {
+        const input = await ask("You: ");
+        if (input.toLowerCase() === "exit") {
+            console.log("\nChat session ended.");
+            break;
+        }
+
+        const response = await chain.call({ input });
+        console.log(`${profile?.name}:`, response.response);
+
+        // // Show the internal summary (for debugging)
+        // const summary = memory.buffer;
+        // console.log(`\n🧠 Summary so far:\n${summary}\n`);
+    }
+
+    rl.close();
 }
 
-function printChat(msg: IChatMessage) {
-    const sender = msg.from === credentials.userId ? '🟦 You' : '🟥 Them';
-    const time = new Date(msg.timestamp).toLocaleTimeString();
-    console.log(`[${time}] ${sender}: ${msg.message}`);
-}
-
-// ------------------------------------------
-// ✉️ Send Message Utility (Exported)
-// ------------------------------------------
-export function sendMessage(messageText: string) {
-    const wss = useWSS();
-
-    const msg: IChatMessage = {
-        from: credentials.userId!,
-        to: targetUserId,
-        message: messageText,
-        timestamp: Date.now(),
-    };
-
-    const request: WSBaseRequest<"Chat", "SEND_MSG", IChatMessage> = {
-        type: "Chat",
-        reqType: "SEND_MSG",
-        data: msg,
-        meta: { timestamp: Date.now() }
-    };
-
-    wss.send(JSON.stringify(request));
-}
+run().catch((err) => {
+    console.error("Error in conversation:", err);
+    rl.close();
+});

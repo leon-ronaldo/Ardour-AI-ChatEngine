@@ -4,9 +4,10 @@ import { AbsenceTimeState, ContextState } from "../models/PersonalTraits";
 import { ContactMatrixAgent } from "./ContactMatrixAgent";
 import { ContactWithPreview } from "../models/ChatPool";
 import WebSocket from "ws"
-import { WSAccountRequest, WSAccountResponse } from "../utils/WSTypes";
+import { WSAccountRequest, WSAccountResponse, WSChatRequest, WSChatResponse } from "../utils/WSTypes";
 import stringify from "../utils/tools";
 import { ContactDecisionMatrix } from "../models/CharacterTraits";
+import { ChatGeneratorAgent } from "./ChatGeneratorAgent";
 
 
 export class Master {
@@ -22,11 +23,12 @@ export class Master {
     wss!: WebSocket;
     currentlyIsOffline: boolean = false;
     noAgentImplementedError: Error = new Error(`No agent implemented`)
+    chatGenerator: ChatGeneratorAgent;
 
     constructor(id: string) {
         this.agent = loadProfile(id)!;
         this.agentCharacterTrait = loadTrait(id)!;
-
+        this.chatGenerator = new ChatGeneratorAgent(this.agent)
 
         // connect server and initialize
         this.runWhenOnline(() => this.initializeMessagesAndGenerateContactMatrix());
@@ -43,7 +45,6 @@ export class Master {
                 console.log(`✅ WebSocket connected for agent ${this.agent.name}`);
 
                 // Attach handlers
-                this.wss.addEventListener("message", this.handleMessage);
                 this.wss.addEventListener("close", this.handleClose);
                 this.wss.addEventListener("error", (e) => console.error("WebSocket error:", e));
             });
@@ -65,23 +66,6 @@ export class Master {
                 reject(`WebSocket failed to connect: ${e}`);
             });
         });
-    }
-
-    handleMessage = (event: WebSocket.MessageEvent) => {
-        const parsed = JSON.parse(event.data.toString());
-
-        if (parsed.message && parsed.code === 2000) {
-            console.log(`Init message received for agent ${this.agent.id}: ${this.agent.name}`);
-        }
-
-        if (parsed.data) {
-            // Process server data
-            console.log("Received data:", parsed.data);
-        }
-
-        if (parsed.error) {
-            console.error("Server error:", parsed.error);
-        }
     }
 
     handleClose = async (event: WebSocket.CloseEvent) => {
@@ -266,19 +250,47 @@ export class Master {
     mainLoop() {
         for (var matrix of this.contactMatrix) {
             if (matrix.recommendedAction === "TEXT_FIRST") {
-                this.runWhenOnline(() => this.startChat());
+                this.runWhenOnline(() => this.beginChat(matrix.contactId));
             }
 
             if (matrix.recommendedAction === "WAIT" && matrix.waitToMessageTill) {
+                this.wss.addEventListener("message", (data) => {
+                    this.listenChat(data, matrix.contactId)
+                })
                 const waitMessageTimer = setTimeout(() => {
-                    this.runWhenOnline(() => this.startChat());
+                    this.runWhenOnline(() => this.beginChat(matrix.contactId));
                     clearTimeout(waitMessageTimer);
                 }, this.getTimeInterval(matrix.waitToMessageTill))
             }
         }
     }
 
-    startChat() {
-        
+    checkIsChatFromContact(contactId: string, data: object): boolean {
+        const parsedData = JSON.parse(data.toString())
+        if (parsedData.data) {
+            const res = parsedData as WSChatResponse
+
+            if (res.type === "Chat") {
+                if (res.resType === "PRIVATE_CHAT_MESSAGE" && res.data.from === contactId) {
+                    return true
+                }
+            }
+        }
+
+        return false
+    }
+
+    listenChat(data: WebSocket.MessageEvent, contactId: string) {
+        if (this.checkIsChatFromContact(contactId, data)) {
+            
+        }
+    }
+
+    beginChat(contactId: string) {
+        this.wss.on("message", (data) => {
+            if (this.checkIsChatFromContact(contactId, data)) {
+                
+            }
+        })
     }
 }

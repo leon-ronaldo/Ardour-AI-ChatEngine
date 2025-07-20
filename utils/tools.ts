@@ -27,6 +27,33 @@ export function formatChatLog(messages: IChatMessage[], contactId: string): stri
     }).join('\n');
 }
 
+export function getFormattedToday(): string {
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+    const yyyy = today.getFullYear();
+
+    return `${dd}-${mm}-${yyyy}`;
+}
+
+export function getPreviousFormattedDatesFromToday(n: number): string[] {
+    const dates: string[] = [];
+    const today = new Date();
+
+    for (let i = 0; i < n; i++) {
+        const date = new Date(today);
+        date.setDate(today.getDate() - i);
+
+        const dd = String(date.getDate()).padStart(2, '0');
+        const mm = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+        const yyyy = date.getFullYear();
+
+        dates.push(`${dd}-${mm}-${yyyy}`);
+    }
+
+    return dates;
+}
+
 export function safeParseJSON(response: string) {
     try {
         let raw = response.trim();

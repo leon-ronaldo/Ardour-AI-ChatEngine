@@ -1,26 +1,29 @@
 export type Sender = "AI" | "USER";
 
-export enum Emotion {
-    Happy = "happy",
-    Sad = "sad",
-    Angry = "angry",
-    Calm = "calm",
-    Anxious = "anxious",
-    Excited = "excited",
-    Unknown = "unknown",
-}
+export type Emotion =
+    | "happy"
+    | "sad"
+    | "angry"
+    | "calm"
+    | "anxious"
+    | "excited"
+    | "unknown";
+
 
 export interface Media {
     type: "STICKER" | "GIF",
     genre: "FUNNY" | "MEME" | "ANGRY" | "SAD" | "EXCITED"
 }
 
-
-export interface Chat {
-    message: string,
-    sender: Sender,
-    timestamp: number,
-    emotion: Emotion
+export interface ChatDataSummary {
+    contactId: string;
+    timePeriod: {
+        from: number,
+        to: number,
+    };
+    summary: string;
+    keyWords: string[];
+    mentionedPeople: string[];
+    mentionedIncidents: string[];
+    emotionDescription: string;
 }
-
-export const ChatPool: Chat[] = [];

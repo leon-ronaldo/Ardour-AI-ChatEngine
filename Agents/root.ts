@@ -5,7 +5,7 @@ import readline from "readline";
 import { PromptTemplate } from "@langchain/core/prompts";
 import { Tool } from "langchain/tools";
 
-export const llm = new ChatGoogleGenerativeAI({
+export const AI = new ChatGoogleGenerativeAI({
     model: "gemini-2.5-flash", // or "gemini-1.5-pro", etc.
     apiKey: "AIzaSyBMlGsH4vA9gcEimwnOyMTAFcPZ33J3akI",
     temperature: 0.7,

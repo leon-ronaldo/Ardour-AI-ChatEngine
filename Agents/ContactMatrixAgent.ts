@@ -2,11 +2,17 @@ import { HumanMessage, SystemMessage } from "@langchain/core/messages";
 import { BehavioralProfile, ContactDecisionMatrix, CorePersonality, RelationshipDecisionSummary } from "../models/CharacterTraits";
 import { ContactWithPreview } from "../models/ChatPool";
 import { ContextState, DayRoutine } from "../models/PersonalTraits";
-import { llm } from "./root";
 import { AIProfile } from "../models/Profiles";
 import { safeParseJSON } from "../utils/tools";
+import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 
 export class ContactMatrixAgent {
+
+    llm = new ChatGoogleGenerativeAI({
+        model: "gemini-2.5-flash", // or "gemini-1.5-pro", etc.
+        apiKey: "AIzaSyBMlGsH4vA9gcEimwnOyMTAFcPZ33J3akI",
+        temperature: 0.7,
+    });
 
     getTimeOfDay(hour: number): keyof DayRoutine {
         if (hour >= 5 && hour < 12) return "morning";
@@ -87,7 +93,7 @@ The final activity string must sound natural and human-like.`
       Choose the best matching routine activity and convert to ContextState format.`
         );
 
-        const response = await llm.invoke([systemPrompt, humanPrompt]);
+        const response = await this.llm.invoke([systemPrompt, humanPrompt]);
 
         try {
             const context: ContextState = safeParseJSON(response.content.toString());
@@ -168,7 +174,7 @@ The final activity string must sound natural and human-like.`
       Generate a Contact Decision Matrix now.`
         );
 
-        const response = await llm.invoke([systemPrompt, humanPrompt]);
+        const response = await this.llm.invoke([systemPrompt, humanPrompt]);
 
         try {
             const matrix: ContactDecisionMatrix[] = safeParseJSON(response.content.toString());
